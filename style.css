@@ -40,7 +40,7 @@ header {
     align-items: center;
     width: 100%;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 0;
 }
 
 .logo a {
@@ -73,7 +73,7 @@ main {
     flex: 1;
     width: 100%;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0;
 }
 
 .hero {
@@ -201,7 +201,7 @@ footer {
     align-items: center;
     width: 100%;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0;
     border-top: 1px solid var(--border-color);
     color: var(--text-secondary);
     font-size: 0.9rem;
