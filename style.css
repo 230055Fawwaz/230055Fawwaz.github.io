@@ -6,20 +6,18 @@
    ========================================== */
 
 /* --- 1. CSS Reset & Variables --- */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 :root {
-    --bg-color: #0f172a;
-    --card-bg: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent: #38bdf8;
+    --bg-color: #0f172a;        /* Deep slate background */
+    --card-bg: #1e293b;       /* Lighter slate for cards */
+    --text-primary: #f8fafc;  /* Near white for main text */
+    --text-secondary: #94a3b8;/* Muted gray for descriptions */
+    --accent: #38bdf8;        /* Vibrant developer blue */
     --accent-hover: #0ea5e9;
     --border-color: #334155;
     --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -86,8 +84,7 @@ main {
 }
 
 .hero h1 {
-    font-size.size: 3rem;
-    /* fallback */
+    font-size.size: 3rem; /* fallback */
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 800;
     line-height: 1.2;
@@ -128,7 +125,78 @@ main {
     background-color: var(--card-bg);
 }
 
-/* --- 5. Footer --- */
+/* --- 5. Project Grid & Cards (for project.html) --- */
+.projects-header {
+    margin-bottom: 3rem;
+}
+
+.projects-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.projects-header p {
+    color: var(--text-secondary);
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.2s ease;
+}
+
+.project-card:hover {
+    border-color: var(--accent);
+}
+
+.project-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.project-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-tags span {
+    background-color: var(--bg-color);
+    color: var(--accent);
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-links .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* --- 6. Footer --- */
 footer {
     display: flex;
     justify-content: space-between;
