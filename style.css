@@ -139,6 +139,13 @@ main {
     margin-bottom: 2.25rem;
 }
 
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
 /* --- 4. Content Sections (About, Contact) --- */
 .content-section {
     padding: 3.5rem 0;
