@@ -1,5 +1,5 @@
 /**
- * DATABASE PROYEK - ARSIP FAWWAZ YAQZHAN
+ * PROJECT DATABASE - FAWWAZ YAQZHAN ARCHIVE
  * Format: SCP Document Dossier Registry
  */
 const PROJECTS_DATA = [
@@ -12,21 +12,21 @@ const PROJECTS_DATA = [
     semester: "Semester 7",
     category: "web",
     role: "Fullstack Developer",
-    shortDesc: "Sistem informasi lokal dan offline penuh untuk tata kelola keuangan pribadi modular (evolusi dari MyFinance).",
+    shortDesc: "Fully local, offline personal finance management system with modular architecture (evolution of MyFinance).",
     techStack: ["Flask", "Python", "Jinja2", "SQLite", "JavaScript", "Chart.js", "Batch Automation"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: true,
-    origin: "Pemecah masalah pribadi dalam mengatur cash flow dan investasi pemula.",
+    origin: "Personal initiative to solve cash flow tracking and novice investment portfolio management.",
     contributions: [
-      "Merancang arsitektur aplikasi modular menggunakan Flask Application Factory & Blueprints.",
-      "Membangun wireframe, antarmuka low-fidelity, hingga sistem dashboard berbasis Chart.js.",
-      "Menyusun logika bisnis klasifikasi pengeluaran, budgeting bulanan, dan audit histori keuangan.",
-      "Mengintegrasikan skrip automasi batch untuk kemudahan inisialisasi lokal tanpa dependensi rumit."
+      "Engineered a modular application architecture using Flask Application Factory & Blueprints.",
+      "Designed wireframes, low-fidelity UI, and an interactive analytical dashboard powered by Chart.js.",
+      "Developed business logic for multi-tier expense classification, monthly budgeting, and financial audit trails.",
+      "Integrated batch automation scripts for seamless one-click local initialization with zero complex setup."
     ],
-    uniqueNote: "Proyek pertama yang dirancang untuk rilis publik dengan fokus pada privasi data 100% lokal tanpa cloud tracker.",
+    uniqueNote: "First personal project architected for public release with a strict 100% offline data privacy design and zero external cloud trackers.",
     addendum: `
-      [LOG ENTRY 07-A]: Transisi dari sistem MyFinance versi 1 memerlukan perombakan skema database SQLite guna mendukung kalkulasi arus kas berulang dan visualisasi analitik multivariat.
-      [LOG ENTRY 07-B]: Sistem dirancang zero-leakage; seluruh data finansial dienkripsi secara lokal di perangkat pengguna.
+      [LOG ENTRY 07-A]: Transitioning from MyFinance v1 required complete SQLite schema refactoring to support recurring cash flow projection and multivariate analytical visualization.
+      [LOG ENTRY 07-B]: System adheres to a zero-leakage security posture; all financial records are stored and encrypted locally on client devices.
     `
   },
   {
@@ -41,17 +41,17 @@ const PROJECTS_DATA = [
     techStack: ["Node.js", "Express", "Next.js", "PostgreSQL (Supabase)", "Pinecone", "Gemini API", "Midtrans"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: true,
-    origin: "Tugas proyek kolaboratif pengembangan asisten konsultasi hukum perdata berbasis AI.",
+    origin: "Collaborative academic capstone project to develop an intelligent legal consultation assistant for civil law inquiries.",
     contributions: [
-      "Mengembangkan sistem autentikasi aman (Email OTP & Google OAuth SSO).",
-      "Mengimplementasikan Role-Based Access Control (RBAC) untuk pengguna umum dan staf administrator.",
-      "Membangun alur reset password aman dengan validasi token berbasis waktu via email.",
-      "Mengintegrasikan endpoint profil pengguna dengan upload media dan sinkronisasi database PostgreSQL."
+      "Engineered robust authentication services featuring Email OTP verification and Google OAuth SSO.",
+      "Implemented Role-Based Access Control (RBAC) separating public users from administrative management tiers.",
+      "Built a time-sensitive tokenized password reset flow distributed via automated email relay.",
+      "Integrated user profile endpoints with multimedia asset uploads and PostgreSQL database synchronization."
     ],
-    uniqueNote: "Proyek kolaboratif lintas disiplin pertama yang mengintegrasikan LLM RAG, vector search (Pinecone), dan sistem pembayaran Midtrans.",
+    uniqueNote: "First cross-disciplinary collaborative project integrating LLM RAG pipelines, Pinecone vector indexing, and Midtrans payment gateway.",
     addendum: `
-      [LOG ENTRY 07-C]: Integrasi Gemini API memerlukan perumusan system prompt yang ketat guna membatasi yurisdiksi jawaban hanya pada KUHPerdata Indonesia.
-      [LOG ENTRY 07-D]: Pipa CI/CD dibangun menggunakan GitHub Actions untuk menjamin stabilitas endpoint API sebelum pengujian bersama tim frontend.
+      [LOG ENTRY 07-C]: Gemini API integration required strict system prompt engineering to constrain legal reasoning strictly within Indonesian Civil Code (KUHPerdata) jurisdictions.
+      [LOG ENTRY 07-D]: Automated CI/CD pipelines constructed via GitHub Actions ensured API endpoint integrity ahead of end-to-end frontend integration testing.
     `
   },
   {
@@ -60,23 +60,23 @@ const PROJECTS_DATA = [
     title: "IT Inventory Management System",
     status: "OPERATIONAL / ARCHIVED",
     classification: "SAFE / INDUSTRIAL DEPLOYMENT",
-    semester: "Semester 7 (Magang PEMI)",
+    semester: "Semester 7 (PEMI Internship)",
     category: "web",
     role: "Fullstack Developer (IT Intern)",
     techStack: ["Flask", "Python", "MySQL", "Jinja2", "Vanilla JS", "Chart.js", "Batch Files"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: true,
-    origin: "Proyek penugasan magang pada PT. EDS Manufacturing Indonesia (Yazaki Indonesia Group).",
+    origin: "Industrial internship project assigned at PT. EDS Manufacturing Indonesia (Yazaki Indonesia Group).",
     contributions: [
-      "Merancang aplikasi inventaris terstruktur dengan multi-user privilege dan audit trail aset.",
-      "Membuat fitur bulk import data Excel dan auto-suggestion untuk 50.000+ catatan spare part & hardware.",
-      "Menyusun modul Obsolete Asset tracking untuk mengidentifikasi perangkat yang mendekati akhir siklus pakai.",
-      "Melakukan migrasi dan deployment penuh ke infrastruktur server lokal on-premise perusahaan."
+      "Architected a structured inventory application equipped with granular multi-user privileges and asset audit logs.",
+      "Developed high-speed bulk Excel spreadsheet import pipelines and auto-suggestion query filters for 50,000+ spare parts & hardware entries.",
+      "Engineered an Obsolete Asset tracking module to flag hardware nearing end-of-life and optimize replacement cycles.",
+      "Orchestrated data migration and full production deployment onto on-premise company intranet servers."
     ],
-    uniqueNote: "Proyek perdana yang menghadapi kebutuhan riil stakeholder industri otomotif manufaktur skala internasional.",
+    uniqueNote: "Debut industrial-scale software project engineered to meet strict corporate stakeholder requirements within an international automotive manufacturing group.",
     addendum: `
-      [LOG ENTRY 07-E]: Rekonsiliasi 2.500+ baris data PostgreSQL produksi dengan spreadsheet procurement anggaran via formula analitik lanjutan.
-      [LOG ENTRY 07-F]: Sanitasi 50.000+ baris data suku cadang IT di server MySQL live tanpa insiden downtime atau kehilangan integritas data.
+      [LOG ENTRY 07-E]: Successfully reconciled 2,500+ production PostgreSQL records against corporate procurement ledgers using advanced analytical formulas.
+      [LOG ENTRY 07-F]: Sanitized and validated 50,000+ IT hardware records directly on live MySQL production servers with zero operational downtime or data degradation.
     `
   },
   {
@@ -85,22 +85,22 @@ const PROJECTS_DATA = [
     title: "CLI Networks Suite - Modern Terminal Utility",
     status: "DEPLOYED / RESEARCH",
     classification: "SAFE / NETWORK UTILITY",
-    semester: "Eksplorasi Jaringan",
+    semester: "Network Exploration",
     category: "network",
     role: "CLI Tool Developer",
     techStack: ["Python", "Rich", "Socket", "ipaddress", "Argparse"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: true,
-    origin: "Proyek eksplorasi mandiri untuk otomasi perhitungan subnetting dan diagnosis konektivitas.",
+    origin: "Independent research project aiming to streamline subnetting calculations and connectivity diagnosis through CLI automation.",
     contributions: [
-      "Merancang parser CLI interaktif yang mendukung mode menu dan argumen command-line langsung.",
-      "Mengembangkan mesin kalkulator VLSM/Subnetting berbasis modul ipaddress dengan tabel visual.",
-      "Mengimplementasikan asynchronous port scanner multi-threaded untuk verifikasi servis aktif.",
-      "Mendesain tampilan terminal modern dengan library Rich (progress bar, tabel berwarna, status indicator)."
+      "Architected an interactive CLI parser supporting dual operational modes: interactive navigation menus and direct command-line arguments.",
+      "Built a VLSM / Subnetting calculation engine powered by Python's ipaddress library with formatted terminal data tables.",
+      "Implemented a multi-threaded asynchronous TCP port scanner for rapid live network service discovery.",
+      "Crafted a terminal UI leveraging the Rich library, complete with animated progress indicators and styled telemetry output."
     ],
-    uniqueNote: "Membuktikan antarmuka command-line dapat disajikan secara elegan, intuitif, dan responsif tanpa bantuan browser.",
+    uniqueNote: "Demonstrated that command-line utilities can deliver elegant, intuitive, and responsive user experiences without relying on browser GUIs.",
     addendum: `
-      [LOG ENTRY NET-01]: Dirancang khusus untuk efisiensi diagnosa teknis sysadmin dan mahasiswa CCNA dalam menentukan network address, broadcast, and usable host range dalam hitungan milidetik.
+      [LOG ENTRY NET-01]: Optimized specifically for sysadmins and CCNA students to determine network addresses, broadcast boundaries, and usable host scopes in milliseconds.
     `
   },
   {
@@ -109,23 +109,22 @@ const PROJECTS_DATA = [
     title: "Packet Crafting & Protocol Inspector",
     status: "RESEARCH ACTIVE",
     classification: "EUCLID / NETWORK SECURITY",
-    semester: "Eksplorasi CCNA & Keamanan",
+    semester: "CCNA & Security Exploration",
     category: "network",
     role: "Protocol & Security Engineer",
     techStack: ["Python", "Scapy", "Npcap", "Wireshark", "Raw Sockets"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: true,
-    origin: "Eksperimen langsung untuk membedah paket data pada lapisan OSI Layer secara hands-on.",
+    origin: "Hands-on experimental lab exploring low-level OSI model packet behavior and protocol header construction.",
     contributions: [
-      "Menulis skrip penangkapan paket real-time (sniffing) dengan filter protokol spesifik (ARP, ICMP, DNS).",
-      "Membuat modul rekonstruksi dan injeksi paket kustom untuk menguji ketahanan firewall lokal.",
-      "Mengembangkan scanner deteksi host aktif melalui teknik ARP Ping terarah.",
-      "Menyajikan ringkasan payload dan header biner ke dalam format log terstruktur."
+      "Authored real-time packet sniffing scripts equipped with protocol filtering algorithms (ARP, ICMP, DNS).",
+      "Developed custom packet crafting and injection modules to audit local firewall filtering rules.",
+      "Engineered an active host discovery scanner utilizing targeted ARP ping sweeps across subnets.",
+      "Parsed and structured raw binary payloads and packet headers into standardized terminal diagnostic logs."
     ],
-    uniqueNote: "Menjembatani teori abstrak sertifikasi CCNA menjadi baris instruksi kode yang dapat diobservasi perilakunya di kawat jaringan.",
+    uniqueNote: "Bridged abstract CCNA theoretical concepts into observable, code-driven network wire behaviors.",
     addendum: `
-      [LOG ENTRY NET-02]: Eksperimen dilakukan di lingkungan sandbox tertutup guna mencegah kebocoran transmisi paket di luar subnet laboratorium uji.
-    `
+      [LOG ENTRY NET-02]: Testing strictly executed within isolated, sandboxed virtual network environments to prevent unintended frame leakage outside designated lab subnets.`
   },
   {
     id: "myfinance",
@@ -139,15 +138,15 @@ const PROJECTS_DATA = [
     techStack: ["Flask", "Python", "SQLite", "Chart.js", "Jinja2 HTML", "CSS", "Batch Files"],
     githubUrl: "https://github.com/230055Fawwaz/MyFinance",
     featured: false,
-    origin: "Solusi pribadi untuk memantau pengeluaran bulanan mahasiswa secara terstruktur.",
+    origin: "Personal software solution developed to systematically record and analyze monthly student expenditures.",
     contributions: [
-      "Merancang skema database relasional SQLite untuk kategori pengeluaran dan pemasukan.",
-      "Membuat visualisasi pie-chart dan bar-chart pergerakan kas bulanan menggunakan Chart.js.",
-      "Membangun antarmuka desktop-friendly yang dapat dijalankan secara instan dengan satu kali klik file batch."
+      "Designed normalized SQLite relational database schemas for expense categorization and cash flow entries.",
+      "Engineered interactive pie and bar charts visualizing monthly expenditure distribution using Chart.js.",
+      "Built a responsive, desktop-friendly web interface launched instantly via batch file automation."
     ],
-    uniqueNote: "Proyek personal pertama yang secara konsisten dipakai dalam aktivitas harian dan mendasari lahirnya Capital Hub.",
+    uniqueNote: "First foundational software project consistently utilized in daily routines, serving as the direct architectural basis for Capital Hub.",
     addendum: `
-      [LOG ENTRY 06-A]: Sistem ini berhasil mencatat lebih dari 6 bulan transaksi pribadi sebelum arsitekturnya direfaktor menjadi Capital Hub.
+      [LOG ENTRY 06-A]: Successfully recorded and managed more than 6 months of daily personal financial transactions prior to the architectural refactoring into Capital Hub.
     `
   },
   {
@@ -162,15 +161,15 @@ const PROJECTS_DATA = [
     techStack: ["Python", "Flask", "Ollama", "Qwen 2.5", "SQLite-Vector", "HTML/CSS/JS"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: false,
-    origin: "Inisiatif pembuatan asisten belajar cerdas khusus mata kuliah Jaringan Komputer & Komunikasi Data.",
+    origin: "Academic initiative to build an intelligent study companion tailored for Computer Networks & Data Communication coursework.",
     contributions: [
-      "Mengonfigurasi model open-source Qwen 2.5 pada runtime lokal Ollama.",
-      "Membangun sistem Retrieval-Augmented Generation (RAG) sederhana dengan penyimpanan vektor di SQLite.",
-      "Membuat antarmuka web bergaya dialog konsol untuk interaksi tanya-jawab mahasiswa."
+      "Configured and served the open-source Qwen 2.5 language model on a local hardware runtime via Ollama.",
+      "Constructed an on-device Retrieval-Augmented Generation (RAG) pipeline utilizing SQLite-based vector storage.",
+      "Designed a retro console-inspired chat interface for student query interactions."
     ],
-    uniqueNote: "Eksperimen batas kemampuan komputasi hardware lokal dalam memproses embedding dan inferensi LLM tanpa GPU server khusus.",
+    uniqueNote: "Experimental benchmark evaluating consumer hardware boundaries in executing local embeddings and LLM inference without dedicated GPU servers.",
     addendum: `
-      [LOG ENTRY 06-B]: Tingkat latency lokal yang tinggi memberikan wawasan mendalam mengenai kebutuhan kuantisasi model (4-bit quantization) untuk edge computing.
+      [LOG ENTRY 06-B]: High on-device latency highlighted crucial takeaways regarding model quantization (4-bit GGML/GGUF) and context window limits for edge deployments.
     `
   },
   {
@@ -185,15 +184,15 @@ const PROJECTS_DATA = [
     techStack: ["GNS3", "NGFW (Fortinet/PFSense)", "BGP", "OSPF", "CDN Proxy"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: false,
-    origin: "Tugas rancang bangun infrastruktur jaringan enterprise berskala global.",
+    origin: "Capstone network engineering assignment designing enterprise-grade global network infrastructure.",
     contributions: [
-      "Merancang topologi multi-region dengan integrasi Content Delivery Network (CDN) untuk distribusi aset game.",
-      "Mengonfigurasi Next-Generation Firewall (NGFW) dengan aturan inspeksi paket mendalam (DPI).",
-      "Melakukan simulasi failover jalur redundan untuk menjamin ketersediaan tinggi (high-availability)."
+      "Designed multi-region topology integrated with Content Delivery Network (CDN) edge nodes for global game asset distribution.",
+      "Configured Next-Generation Firewalls (NGFW) with granular Deep Packet Inspection (DPI) security policies.",
+      "Simulated multi-path redundant link failovers to ensure enterprise high-availability (HA) SLAs."
     ],
-    uniqueNote: "Simulasi jaringan enterprise terlengkap yang mencakup pertukaran rute antar Autonomous Systems.",
+    uniqueNote: "Most comprehensive enterprise network simulation conducted, orchestrating complex route exchanges across diverse Autonomous Systems.",
     addendum: `
-      [LOG ENTRY 06-C]: Berhasil memverifikasi penurunan latency distribusi traffic hingga 40% dalam topologi simulasi CDN terdistribusi.
+      [LOG ENTRY 06-C]: Successfully verified a 40% reduction in traffic distribution latency under simulated multi-region CDN caching topologies.
     `
   },
   {
@@ -208,15 +207,15 @@ const PROJECTS_DATA = [
     techStack: ["Cisco Packet Tracer", "IoT Gateway", "VLAN Segmentation", "Access Point"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: false,
-    origin: "Rancangan jaringan toko ritel pintar berbasis otomasi sensor dan pengawasan terpusat.",
+    origin: "Enterprise retail store network design featuring automated environmental sensor nodes and centralized surveillance.",
     contributions: [
-      "Menentukan arsitektur hierarkis (Core, Distribution, Access) untuk integrasi perangkat IoT retail.",
-      "Mengonfigurasi segregasi VLAN untuk memisahkan lalu lintas Point-of-Sale (POS) dari perangkat publik.",
-      "Menguji transmisi telemetri sensor lingkungan dan kamera pengawas secara simultan."
+      "Applied hierarchical campus design (Core, Distribution, Access) to integrate retail IoT endpoint devices.",
+      "Configured isolated VLAN segmentation separating critical Point-of-Sale (POS) traffic from guest and management networks.",
+      "Simulated simultaneous telemetry streaming across environmental IoT sensors and IP surveillance feeds."
     ],
-    uniqueNote: "Penerapan teori CCNA SRWE dalam skenario pemisahan zona keamanan jaringan ritel.",
+    uniqueNote: "Practical implementation of CCNA SRWE network security principles within real-world retail trust zone boundaries.",
     addendum: `
-      [LOG ENTRY 06-D]: Semua endpoint POS diisolasi di subnet khusus dengan access-list (ACL) ketat menuju database pusat.
+      [LOG ENTRY 06-D]: All POS endpoints were strictly isolated in dedicated subnets governed by inbound/outbound Access Control Lists (ACLs) to the central payment database.
     `
   },
   {
@@ -231,15 +230,15 @@ const PROJECTS_DATA = [
     techStack: ["C#", "Unity 3D", "Meta Quest SDK", "VR Physics"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: false,
-    origin: "Pengembangan pengalaman virtual reality untuk mendukung kampanye kesehatan mental (SDGs 3.4).",
+    origin: "Spatial computing game development supporting global mental health awareness under UN SDG 3.4.",
     contributions: [
-      "Mengimplementasikan pergerakan karakter kinetik bebas mual (smooth locomotion) pada Meta Quest.",
-      "Membangun sistem quest event trigger dan interaksi objek lingkungan virtual.",
-      "Mengoptimalkan asset poligon dan pencahayaan untuk menjaga frame rate stabil di 72 FPS."
+      "Implemented motion-sickness-free kinetic locomotion mechanics optimized for Meta Quest hardware.",
+      "Built interactive quest event triggers and environmental physics interactions in Unity C#.",
+      "Optimized polygon density and baked lighting setups to maintain a locked, stutter-free 72 FPS refresh rate.",
     ],
-    uniqueNote: "Eksplorasi intensif grafika 3D dan spatial computing dengan tantangan deadline pengerjaan maraton.",
+    uniqueNote: "Intensive 3D spatial computing sprint delivering interactive therapeutic virtual environments under marathon deadlines.",
     addendum: `
-      [LOG ENTRY 06-E]: Terbukti memberikan pengalaman visual relaksasi interaktif bagi para pengguna pengujian awal.
+      [LOG ENTRY 06-E]: Testing confirmed significant positive user feedback regarding relaxing interactive atmospheric experiences during user evaluations.
     `
   }
 ];

@@ -33,7 +33,7 @@ function initRedactedText() {
       el.classList.toggle('revealed');
     });
     // Add title hint
-    el.setAttribute('title', 'KLASIFIKASI: Klik untuk mendeklasifikasi teks.');
+    el.setAttribute('title', 'CLASSIFIED: Click to declassify text.');
   });
 }
 
@@ -76,8 +76,8 @@ function initProjectsCatalog() {
     if (filtered.length === 0) {
       container.innerHTML = `
         <div class="scp-warning-box" style="grid-column: 1 / -1;">
-          <strong>[ARSIP KOSONG]</strong>
-          Tidak ada berkas proyek yang ditemukan untuk kategori klasifikasi ini.
+          <strong>[EMPTY ARCHIVE]</strong>
+          No project files were found matching this classification category.
         </div>
       `;
       return;
@@ -128,7 +128,7 @@ function createProjectCardHtml(project) {
       <div class="card-action-bar">
         ${githubBtn}
         <a href="proyek-detail.html?id=${encodeURIComponent(project.id)}" class="btn-dossier">
-          Baca Detail &rarr;
+          Read Details &rarr;
         </a>
       </div>
     </article>
@@ -144,7 +144,7 @@ function initProjectDetail() {
   const projectId = urlParams.get('id');
 
   if (!projectId) {
-    // If no ID provided, show the first project or catalog selector
+    // If no ID provided, show the catalog selector fallback
     renderDetailFallback(container);
     return;
   }
@@ -153,21 +153,21 @@ function initProjectDetail() {
   if (!project) {
     container.innerHTML = `
       <div class="scp-warning-box">
-        <strong>[KESALAHAN OTORISASI // 404 DATA NOT FOUND]</strong>
-        Berkas berkode ID "<code>${escapeHtml(projectId)}</code>" tidak ditemukan dalam arsip atau telah dimusnahkan.
+        <strong>[AUTHORIZATION ERROR // 404 DATA NOT FOUND]</strong>
+        Dossier with ID code "<code>${escapeHtml(projectId)}</code>" was not found in the archive or has been expunged.
       </div>
-      <a href="proyek.html" class="btn-dossier">&larr; Kembali ke Katalog Proyek</a>
+      <a href="proyek.html" class="btn-dossier">&larr; Back to Project Catalog</a>
     `;
     return;
   }
 
   // Update page title
-  document.title = `${project.title} - Arsip SCP Dossier Fawwaz`;
+  document.title = `${project.title} - Fawwaz SCP Dossier Archive`;
 
   // Render full SCP Series formatted dossier
   const contributionsList = project.contributions && project.contributions.length > 0
     ? project.contributions.map(c => `<li>${escapeHtml(c)}</li>`).join('')
-    : `<li>Implementasi logika arsitektural dan integrasi dependensi sistem.</li>`;
+    : `<li>Architectural logic implementation and system dependency integration.</li>`;
 
   const techStackBadges = project.techStack
     .map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`)
@@ -187,8 +187,8 @@ function initProjectDetail() {
 
     <!-- Security Warning Banner -->
     <div class="scp-warning-box">
-      <strong>PERINGATAN DOKUMEN PROYEK: KLASIFIKASI ${escapeHtml(project.classification)}</strong>
-      Dossier ini berisi rekaman teknis, catatan arsitektur, dan log pengembangan implementasi karya. Akses publik telah dideklasifikasi untuk peninjauan portofolio.
+      <strong>PROJECT DOSSIER WARNING: CLASSIFICATION ${escapeHtml(project.classification)}</strong>
+      This dossier contains technical records, architectural notes, and implementation development logs. Public access has been authorized for portfolio review.
     </div>
 
     <!-- Project Technical Specifications Table -->
@@ -210,7 +210,7 @@ function initProjectDetail() {
         <div class="spec-value">${escapeHtml(project.role)}</div>
       </div>
       <div class="spec-row">
-        <div class="spec-label">Tech Stack Stack</div>
+        <div class="spec-label">Tech Stack</div>
         <div class="spec-value">${techStackBadges}</div>
       </div>
       ${project.githubUrl ? `
@@ -222,14 +222,14 @@ function initProjectDetail() {
 
     <!-- Section 1: Overview & Origin -->
     <h2 style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--scp-crimson); margin: 28px 0 12px;">
-      1. RINGKASAN & LATAR BELAKANG PROYEK
+      1. PROJECT SUMMARY &amp; BACKGROUND
     </h2>
-    <p style="margin-bottom: 14px;"><strong>Deskripsi Operasional:</strong> ${escapeHtml(project.shortDesc)}</p>
-    <p style="margin-bottom: 20px;"><strong>Asal Muasal / Problem Statement:</strong> ${escapeHtml(project.origin || 'Kebutuhan pemecahan masalah dan eksplorasi teknologi.')}</p>
+    <p style="margin-bottom: 14px;"><strong>Operational Description:</strong> ${escapeHtml(project.shortDesc)}</p>
+    <p style="margin-bottom: 20px;"><strong>Origin / Problem Statement:</strong> ${escapeHtml(project.origin || 'Technical exploration and problem-solving initiative.')}</p>
 
     <!-- Section 2: Contributions & Architecture -->
     <h2 style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--scp-crimson); margin: 28px 0 12px;">
-      2. LOG KONTRIBUSI & IMPLEMENTASI SISTEM
+      2. CONTRIBUTION LOG &amp; SYSTEM IMPLEMENTATION
     </h2>
     <ul style="padding-left: 20px; margin-bottom: 24px;">
       ${contributionsList}
@@ -237,17 +237,17 @@ function initProjectDetail() {
 
     <!-- Section 3: Addenda / Development Notes -->
     <h2 style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--scp-crimson); margin: 28px 0 12px;">
-      3. ADDENDUM / CATATAN KHUSUS PENGEMBANGAN
+      3. ADDENDUM / SPECIAL DEVELOPMENT NOTES
     </h2>
     <div class="addendum-box">
-${escapeHtml(project.addendum || '[LOG ENTRY]: Tidak ada anomali teknis yang tercatat.')}
-[CATATAN UNIK]: ${escapeHtml(project.uniqueNote || 'Tercatat dalam rekam jejak portofolio resmi.')}
+${escapeHtml(project.addendum || '[LOG ENTRY]: No technical anomalies recorded.')}
+[UNIQUE NOTE]: ${escapeHtml(project.uniqueNote || 'Documented in official portfolio record.')}
     </div>
 
     <!-- Actions -->
     <div style="margin-top: 36px; padding-top: 20px; border-top: 2px solid var(--scp-border-light); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-      <a href="proyek.html" class="btn-dossier">&larr; Kembali ke Katalog Proyek</a>
-      ${project.githubUrl ? `<a href="${escapeHtml(project.githubUrl)}" target="_blank" rel="noopener noreferrer" class="btn-dossier btn-dossier-secondary">Buka Repositori GitHub &rarr;</a>` : ''}
+      <a href="proyek.html" class="btn-dossier">&larr; Back to Project Catalog</a>
+      ${project.githubUrl ? `<a href="${escapeHtml(project.githubUrl)}" target="_blank" rel="noopener noreferrer" class="btn-dossier btn-dossier-secondary">Open GitHub Repository &rarr;</a>` : ''}
     </div>
   `;
 }
@@ -256,8 +256,8 @@ function renderDetailFallback(container) {
   const all = getAllProjects();
   container.innerHTML = `
     <div class="scp-warning-box">
-      <strong>[PILIH BERKAS PROYEK]</strong>
-      Silakan tentukan berkas proyek yang ingin Anda periksa secara mendalam dari arsip berikut:
+      <strong>[SELECT PROJECT DOSSIER]</strong>
+      Please select a project dossier from the archive below to inspect in detail:
     </div>
     <div class="cards-grid">
       ${all.map(p => createProjectCardHtml(p)).join('')}
@@ -274,15 +274,14 @@ function initContactTerminal() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const sender = document.getElementById('input-sender')?.value || 'AGENT-UNKNOWN';
-    const message = document.getElementById('input-message')?.value || '';
 
     terminalLog.innerHTML = `
       <div style="color: #39ff14; font-family: var(--font-mono); font-size: 0.8rem; margin-top: 14px; padding: 12px; background: #000; border: 1px solid #39ff14;">
         &gt; TRANSMISSION INITIATED...<br>
         &gt; ENCRYPTING PACKET FROM: ${escapeHtml(sender)}<br>
         &gt; DISPATCHING MESSAGE TO FAWWAZ YAQZHAN [DIRECT MAIL RELAY]...<br>
-        &gt; STATUS: 200 OK - TERIMA KASIH! PESAN BERHASIL DISIMPAN.<br>
-        &gt; <i>Silakan juga hubungi langsung via email resmi: yaqzhanfawwaz@gmail.com</i>
+        &gt; STATUS: 200 OK - THANK YOU! MESSAGE STORED SUCCESSFULLY.<br>
+        &gt; <i>Feel free to also reach out directly via official email: yaqzhanfawwaz@gmail.com</i>
       </div>
     `;
     form.reset();
