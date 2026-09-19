@@ -142,7 +142,7 @@ const PROJECTS_DATA = [
     `
   },
   {
-    id: "",
+    id: "excel-dahsboard",
     itemNumber: "PROJ-04-IS-FI",
     title: "Dashboard Keuangan Excel",
     status: "ARCHIEVED",
