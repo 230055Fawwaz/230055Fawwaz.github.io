@@ -5,16 +5,16 @@
 const PROJECTS_DATA = [
   {
     id: "tanyahukum",
-    itemNumber: "PROJ-07-AI-CH",
+    itemNumber: "PROJ-06-AI-CH",
     title: "TanyaHukum - AI Legal Assistant",
     status: "ACTIVE COLLABORATION",
     classification: "ARTIFICIAL INTELLIGENCE | AI CHATBOT",
-    semester: "Semester 7",
+    semester: "Semester 6",
     category: "ai",
     role: "Backend Engineer",
     techStack: ["Node.js", "Express", "Next.js", "PostgreSQL (Supabase)", "Pinecone", "Gemini API", "Midtrans"],
     githubUrl: "https://github.com/davidchristt/TanyaHukum",
-    featured: true,
+    featured: false,
     origin: "Collaborative academic capstone project to develop an intelligent legal consultation assistant for civil law inquiries.",
     contributions: [
       "Engineered robust authentication services featuring Email OTP verification and Google OAuth SSO.",
@@ -24,7 +24,7 @@ const PROJECTS_DATA = [
     ],
     uniqueNote: "Blank.",
     addendum: `
-      [LOG ENTRY 07-AI-CH-01]: Blank.
+      [LOG ENTRY 06-AI-CH-01]: Blank.
     `
   },
   {
@@ -38,7 +38,7 @@ const PROJECTS_DATA = [
     role: "Fullstack Developer",
     techStack: ["Flask", "Python", "SQLite", "Chart.js", "Jinja2 HTML", "CSS", "Batch Files"],
     githubUrl: "https://github.com/230055Fawwaz/MyFinance",
-    featured: false,
+    featured: true,
     origin: "Personal software solution developed to systematically record and analyze monthly student expenditures.",
     contributions: [
       "Designed normalized SQLite relational database schemas for expense categorization and cash flow entries.",
@@ -139,6 +139,27 @@ const PROJECTS_DATA = [
     uniqueNote: "Intensive 3D spatial computing sprint delivering interactive therapeutic virtual environments under marathon deadlines.",
     addendum: `
       [LOG ENTRY 06-GA-VR-01]: Blank.
+    `
+  },
+  {
+    id: "",
+    itemNumber: "PROJ-04-IS-FI",
+    title: "Dashboard Keuangan Excel",
+    status: "ARCHIEVED",
+    classification: "INFORMATION SYSTEM | FINANCE",
+    semester: "Semester 4 and 5",
+    category: "other",
+    role: "Excel Architect",
+    techStack: ["Microsoft Excel"],
+    githubUrl: "https://github.com/230055Fawwaz/dashboard-keuangan-excel",
+    featured: true,
+    origin: "Personal software solution developed to manage personal money.",
+    contributions: [
+      "Design and built excel dashboard.",
+    ],
+    uniqueNote: "Blank.",
+    addendum: `
+      [LOG ENTRY 04-IS-FI-01]: Blank.
     `
   }
 ];
