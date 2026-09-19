@@ -5,15 +5,15 @@
 const PROJECTS_DATA = [
   {
     id: "tanyahukum",
-    itemNumber: "PROJ-07-TH",
+    itemNumber: "PROJ-07-AI-CH",
     title: "TanyaHukum - AI Legal Assistant",
     status: "ACTIVE COLLABORATION",
-    classification: "EUCLID / AI AUGMENTED",
+    classification: "ARTIFICIAL INTELLIGENCE | AI CHATBOT",
     semester: "Semester 7",
     category: "ai",
     role: "Backend Engineer",
     techStack: ["Node.js", "Express", "Next.js", "PostgreSQL (Supabase)", "Pinecone", "Gemini API", "Midtrans"],
-    githubUrl: "https://github.com/230055Fawwaz",
+    githubUrl: "https://github.com/davidchristt/TanyaHukum",
     featured: true,
     origin: "Collaborative academic capstone project to develop an intelligent legal consultation assistant for civil law inquiries.",
     contributions: [
@@ -22,43 +22,17 @@ const PROJECTS_DATA = [
       "Built a time-sensitive tokenized password reset flow distributed via automated email relay.",
       "Integrated user profile endpoints with multimedia asset uploads and PostgreSQL database synchronization."
     ],
-    uniqueNote: "First cross-disciplinary collaborative project integrating LLM RAG pipelines, Pinecone vector indexing, and Midtrans payment gateway.",
+    uniqueNote: "Blank.",
     addendum: `
-      [LOG ENTRY 07-C]: Gemini API integration required strict system prompt engineering to constrain legal reasoning strictly within Indonesian Civil Code (KUHPerdata) jurisdictions.
-      [LOG ENTRY 07-D]: Automated CI/CD pipelines constructed via GitHub Actions ensured API endpoint integrity ahead of end-to-end frontend integration testing.
-    `
-  },
-  {
-    id: "it-inventory",
-    itemNumber: "PROJ-07-PEMI",
-    title: "IT Inventory Management System",
-    status: "OPERATIONAL / ARCHIVED",
-    classification: "SAFE / INDUSTRIAL DEPLOYMENT",
-    semester: "Semester 7 (PEMI Internship)",
-    category: "web",
-    role: "Fullstack Developer (IT Intern)",
-    techStack: ["Flask", "Python", "MySQL", "Jinja2", "Vanilla JS", "Chart.js", "Batch Files"],
-    githubUrl: "https://github.com/230055Fawwaz",
-    featured: true,
-    origin: "Industrial internship project assigned at PT. EDS Manufacturing Indonesia (Yazaki Indonesia Group).",
-    contributions: [
-      "Architected a structured inventory application equipped with granular multi-user privileges and asset audit logs.",
-      "Developed high-speed bulk Excel spreadsheet import pipelines and auto-suggestion query filters for 50,000+ spare parts & hardware entries.",
-      "Engineered an Obsolete Asset tracking module to flag hardware nearing end-of-life and optimize replacement cycles.",
-      "Orchestrated data migration and full production deployment onto on-premise company intranet servers."
-    ],
-    uniqueNote: "Debut industrial-scale software project engineered to meet strict corporate stakeholder requirements within an international automotive manufacturing group.",
-    addendum: `
-      [LOG ENTRY 07-E]: Successfully reconciled 2,500+ production PostgreSQL records against corporate procurement ledgers using advanced analytical formulas.
-      [LOG ENTRY 07-F]: Sanitized and validated 50,000+ IT hardware records directly on live MySQL production servers with zero operational downtime or data degradation.
+      [LOG ENTRY 07-AI-CH-01]: Blank.
     `
   },
   {
     id: "myfinance",
-    itemNumber: "PROJ-06-MF",
+    itemNumber: "PROJ-06-IS-FI",
     title: "MyFinance - Personal Budget Tracker",
-    status: "ARCHIVED (UPGRADED)",
-    classification: "SAFE / LEGACY SYSTEM",
+    status: "ARCHIVED",
+    classification: "INFORMATION SYSTEM | FINANCE",
     semester: "Semester 6",
     category: "web",
     role: "Fullstack Developer",
@@ -71,17 +45,17 @@ const PROJECTS_DATA = [
       "Engineered interactive pie and bar charts visualizing monthly expenditure distribution using Chart.js.",
       "Built a responsive, desktop-friendly web interface launched instantly via batch file automation."
     ],
-    uniqueNote: "First foundational software project consistently utilized in daily routines, serving as the direct architectural basis for Capital Hub.",
+    uniqueNote: "First foundational software project consistently utilized in daily routines.",
     addendum: `
-      [LOG ENTRY 06-A]: Successfully recorded and managed more than 6 months of daily personal financial transactions prior to the architectural refactoring into Capital Hub.
+      [LOG ENTRY 06-IS-FI-01]: Blank.
     `
   },
   {
     id: "chatbot-jkkd",
-    itemNumber: "PROJ-06-JKKD",
+    itemNumber: "PROJ-06-AI-CH",
     title: "Chatbot JKKD - Local RAG AI",
-    status: "COMPLETED TESTBED",
-    classification: "EUCLID / EDGE AI",
+    status: "COMPLETED TESTBED | ARCHIEVED",
+    classification: "ARTIFICIAL INTELLIGENCE | AI CHATBOT",
     semester: "Semester 6",
     category: "ai",
     role: "Fullstack & AI Engineer",
@@ -94,22 +68,22 @@ const PROJECTS_DATA = [
       "Constructed an on-device Retrieval-Augmented Generation (RAG) pipeline utilizing SQLite-based vector storage.",
       "Designed a retro console-inspired chat interface for student query interactions."
     ],
-    uniqueNote: "Experimental benchmark evaluating consumer hardware boundaries in executing local embeddings and LLM inference without dedicated GPU servers.",
+    uniqueNote: "Blank.",
     addendum: `
-      [LOG ENTRY 06-B]: High on-device latency highlighted crucial takeaways regarding model quantization (4-bit GGML/GGUF) and context window limits for edge deployments.
+      [LOG ENTRY 06-AI-CH-01]: Blank.
     `
   },
   {
     id: "enterprise-game-cdn",
-    itemNumber: "PROJ-06-CDN",
+    itemNumber: "PROJ-06-CN-CDN",
     title: "Global Game Enterprise Architecture & CDN",
-    status: "VERIFIED SIMULATION",
-    classification: "SAFE / INFRASTRUCTURE BLUEPRINT",
+    status: "ARCHIEVED",
+    classification: "COMPUTER NETWORK | SIMULATION",
     semester: "Semester 6",
     category: "network",
     role: "Network Architect",
     techStack: ["GNS3", "NGFW (Fortinet/PFSense)", "BGP", "OSPF", "CDN Proxy"],
-    githubUrl: "https://github.com/230055Fawwaz",
+    githubUrl: "https://github.com/230055Fawwaz/tugas-jaringan-komputer",
     featured: false,
     origin: "Capstone network engineering assignment designing enterprise-grade global network infrastructure.",
     contributions: [
@@ -117,22 +91,22 @@ const PROJECTS_DATA = [
       "Configured Next-Generation Firewalls (NGFW) with granular Deep Packet Inspection (DPI) security policies.",
       "Simulated multi-path redundant link failovers to ensure enterprise high-availability (HA) SLAs."
     ],
-    uniqueNote: "Most comprehensive enterprise network simulation conducted, orchestrating complex route exchanges across diverse Autonomous Systems.",
+    uniqueNote: "Blank",
     addendum: `
-      [LOG ENTRY 06-C]: Successfully verified a 40% reduction in traffic distribution latency under simulated multi-region CDN caching topologies.
+      [LOG ENTRY 06-CN-CDN-01]: Blank.
     `
   },
   {
     id: "ritel-cerdas-iot",
-    itemNumber: "PROJ-06-IOT",
+    itemNumber: "PROJ-06-CN-IOT",
     title: "Smart Retail IoT Network Topology",
-    status: "VERIFIED SIMULATION",
-    classification: "SAFE / IOT INFRASTRUCTURE",
+    status: "ARCHIEVED",
+    classification: "COMPUTER NETWORK | SIMULATION",
     semester: "Semester 6",
     category: "network",
     role: "Network Architect",
     techStack: ["Cisco Packet Tracer", "IoT Gateway", "VLAN Segmentation", "Access Point"],
-    githubUrl: "https://github.com/230055Fawwaz",
+    githubUrl: "https://github.com/230055Fawwaz/tugas-jaringan-komputer",
     featured: false,
     origin: "Enterprise retail store network design featuring automated environmental sensor nodes and centralized surveillance.",
     contributions: [
@@ -140,32 +114,31 @@ const PROJECTS_DATA = [
       "Configured isolated VLAN segmentation separating critical Point-of-Sale (POS) traffic from guest and management networks.",
       "Simulated simultaneous telemetry streaming across environmental IoT sensors and IP surveillance feeds."
     ],
-    uniqueNote: "Practical implementation of CCNA SRWE network security principles within real-world retail trust zone boundaries.",
+    uniqueNote: "Blank.",
     addendum: `
-      [LOG ENTRY 06-D]: All POS endpoints were strictly isolated in dedicated subnets governed by inbound/outbound Access Control Lists (ACLs) to the central payment database.
+      [LOG ENTRY 06-CN-IOT-01]: Blank.
     `
   },
   {
     id: "mountain-journey-vr",
-    itemNumber: "PROJ-06-VR",
+    itemNumber: "PROJ-06-GA-VR",
     title: "Mountain Journey - VR SDGs Experience",
-    status: "COMPLETED",
-    classification: "SAFE / SPATIAL COMPUTING",
+    status: "ARCHIEVED",
+    classification: "GAME | VIRTUAL REALITY",
     semester: "Semester 6",
     category: "other",
     role: "Unity Developer",
     techStack: ["C#", "Unity 3D", "Meta Quest SDK", "VR Physics"],
-    githubUrl: "https://github.com/230055Fawwaz",
+    githubUrl: "https://github.com/Lukas166/mountain-journey-simulator",
     featured: false,
     origin: "Spatial computing game development supporting global mental health awareness under UN SDG 3.4.",
     contributions: [
-      "Implemented motion-sickness-free kinetic locomotion mechanics optimized for Meta Quest hardware.",
       "Built interactive quest event triggers and environmental physics interactions in Unity C#.",
-      "Optimized polygon density and baked lighting setups to maintain a locked, stutter-free 72 FPS refresh rate.",
+      "Help another unity engineer to implement character motion.",
     ],
     uniqueNote: "Intensive 3D spatial computing sprint delivering interactive therapeutic virtual environments under marathon deadlines.",
     addendum: `
-      [LOG ENTRY 06-E]: Testing confirmed significant positive user feedback regarding relaxing interactive atmospheric experiences during user evaluations.
+      [LOG ENTRY 06-GA-VR-01]: Blank.
     `
   }
 ];
