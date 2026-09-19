@@ -4,33 +4,7 @@
  */
 const PROJECTS_DATA = [
   {
-    id: "capital-hub",
-    itemNumber: "PROJ-07-CH",
-    title: "Capital Hub - Advanced Personal Finance",
-    status: "ACTIVE DEVELOPMENT",
-    classification: "SAFE / ENTERPRISE READY",
-    semester: "Semester 7",
-    category: "web",
-    role: "Fullstack Developer",
-    shortDesc: "Fully local, offline personal finance management system with modular architecture (evolution of MyFinance).",
-    techStack: ["Flask", "Python", "Jinja2", "SQLite", "JavaScript", "Chart.js", "Batch Automation"],
-    githubUrl: "https://github.com/230055Fawwaz",
-    featured: true,
-    origin: "Personal initiative to solve cash flow tracking and novice investment portfolio management.",
-    contributions: [
-      "Engineered a modular application architecture using Flask Application Factory & Blueprints.",
-      "Designed wireframes, low-fidelity UI, and an interactive analytical dashboard powered by Chart.js.",
-      "Developed business logic for multi-tier expense classification, monthly budgeting, and financial audit trails.",
-      "Integrated batch automation scripts for seamless one-click local initialization with zero complex setup."
-    ],
-    uniqueNote: "First personal project architected for public release with a strict 100% offline data privacy design and zero external cloud trackers.",
-    addendum: `
-      [LOG ENTRY 07-A]: Transitioning from MyFinance v1 required complete SQLite schema refactoring to support recurring cash flow projection and multivariate analytical visualization.
-      [LOG ENTRY 07-B]: System adheres to a zero-leakage security posture; all financial records are stored and encrypted locally on client devices.
-    `
-  },
-  {
-    id: "tanyahukum-v2",
+    id: "tanyahukum",
     itemNumber: "PROJ-07-TH",
     title: "TanyaHukum - AI Legal Assistant",
     status: "ACTIVE COLLABORATION",
@@ -80,56 +54,9 @@ const PROJECTS_DATA = [
     `
   },
   {
-    id: "cli-networks-tool",
-    itemNumber: "PROJ-NET-01",
-    title: "CLI Networks Suite - Modern Terminal Utility",
-    status: "DEPLOYED / RESEARCH",
-    classification: "SAFE / NETWORK UTILITY",
-    semester: "Network Exploration",
-    category: "network",
-    role: "CLI Tool Developer",
-    techStack: ["Python", "Rich", "Socket", "ipaddress", "Argparse"],
-    githubUrl: "https://github.com/230055Fawwaz",
-    featured: true,
-    origin: "Independent research project aiming to streamline subnetting calculations and connectivity diagnosis through CLI automation.",
-    contributions: [
-      "Architected an interactive CLI parser supporting dual operational modes: interactive navigation menus and direct command-line arguments.",
-      "Built a VLSM / Subnetting calculation engine powered by Python's ipaddress library with formatted terminal data tables.",
-      "Implemented a multi-threaded asynchronous TCP port scanner for rapid live network service discovery.",
-      "Crafted a terminal UI leveraging the Rich library, complete with animated progress indicators and styled telemetry output."
-    ],
-    uniqueNote: "Demonstrated that command-line utilities can deliver elegant, intuitive, and responsive user experiences without relying on browser GUIs.",
-    addendum: `
-      [LOG ENTRY NET-01]: Optimized specifically for sysadmins and CCNA students to determine network addresses, broadcast boundaries, and usable host scopes in milliseconds.
-    `
-  },
-  {
-    id: "packet-crafting",
-    itemNumber: "PROJ-NET-02",
-    title: "Packet Crafting & Protocol Inspector",
-    status: "RESEARCH ACTIVE",
-    classification: "EUCLID / NETWORK SECURITY",
-    semester: "CCNA & Security Exploration",
-    category: "network",
-    role: "Protocol & Security Engineer",
-    techStack: ["Python", "Scapy", "Npcap", "Wireshark", "Raw Sockets"],
-    githubUrl: "https://github.com/230055Fawwaz",
-    featured: true,
-    origin: "Hands-on experimental lab exploring low-level OSI model packet behavior and protocol header construction.",
-    contributions: [
-      "Authored real-time packet sniffing scripts equipped with protocol filtering algorithms (ARP, ICMP, DNS).",
-      "Developed custom packet crafting and injection modules to audit local firewall filtering rules.",
-      "Engineered an active host discovery scanner utilizing targeted ARP ping sweeps across subnets.",
-      "Parsed and structured raw binary payloads and packet headers into standardized terminal diagnostic logs."
-    ],
-    uniqueNote: "Bridged abstract CCNA theoretical concepts into observable, code-driven network wire behaviors.",
-    addendum: `
-      [LOG ENTRY NET-02]: Testing strictly executed within isolated, sandboxed virtual network environments to prevent unintended frame leakage outside designated lab subnets.`
-  },
-  {
     id: "myfinance",
     itemNumber: "PROJ-06-MF",
-    title: "MyFinance v1 - Personal Budget Tracker",
+    title: "MyFinance - Personal Budget Tracker",
     status: "ARCHIVED (UPGRADED)",
     classification: "SAFE / LEGACY SYSTEM",
     semester: "Semester 6",
