@@ -13,27 +13,69 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactTerminal();
 });
 
-/* --- 1. Mobile Nav Toggle --- */
+/* --- 1. Mobile Nav Toggle & Keyboard Accessibility --- */
 function initMobileNav() {
   const toggleBtn = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-menu');
-  if (toggleBtn && navMenu) {
-    toggleBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('is-open');
-    });
+  if (!toggleBtn || !navMenu) return;
+
+  // Set initial aria state
+  toggleBtn.setAttribute('aria-expanded', 'false');
+
+  function toggleMenu(forceClose = false) {
+    const isOpen = forceClose ? false : !navMenu.classList.contains('is-open');
+    if (isOpen) {
+      navMenu.classList.add('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      navMenu.classList.remove('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
   }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('is-open') && !navMenu.contains(e.target) && e.target !== toggleBtn) {
+      toggleMenu(true);
+    }
+  });
+
+  // Close with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu.classList.contains('is-open')) {
+      toggleMenu(true);
+      toggleBtn.focus();
+    }
+  });
 }
 
-/* --- 2. Redacted Text Interactive Reveal --- */
+/* --- 2. Redacted Text Interactive Reveal (Mouse & Keyboard) --- */
 function initRedactedText() {
   const redactedElements = document.querySelectorAll('.redacted');
   redactedElements.forEach(el => {
-    // Reveal on click or touch
+    // Accessibility attributes
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'button');
+    el.setAttribute('title', 'CLASSIFIED: Click or press Enter to declassify text.');
+    el.setAttribute('aria-label', 'Classified text: click or press Enter to declassify');
+
+    // Click / touch handler
     el.addEventListener('click', () => {
       el.classList.toggle('revealed');
     });
-    // Add title hint
-    el.setAttribute('title', 'CLASSIFIED: Click to declassify text.');
+
+    // Keyboard handler (Enter or Space)
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        el.classList.toggle('revealed');
+      }
+    });
   });
 }
 
@@ -46,6 +88,11 @@ function initActiveNavLink() {
     const href = link.getAttribute('href');
     if (href === currentPath || (currentPath === '' && href === 'index.html')) {
       link.classList.add('active');
+    } else if (currentPath !== 'proyek-detail.html' || href !== 'proyek.html') {
+      // Keep proyek.html active if on proyek-detail.html, otherwise remove false actives
+      if (href !== currentPath) {
+        link.classList.remove('active');
+      }
     }
   });
 }
@@ -114,6 +161,8 @@ function createProjectCardHtml(project) {
        </a>`
     : '';
 
+  const description = project.shortDesc || project.origin || 'Archived engineering project dossier.';
+
   return `
     <article class="dossier-card">
       <div>
@@ -122,7 +171,7 @@ function createProjectCardHtml(project) {
           <span class="card-class-badge">${escapeHtml(project.classification)}</span>
         </div>
         <h3 class="card-title">${escapeHtml(project.title)}</h3>
-        <p class="card-desc">${escapeHtml(project.shortDesc)}</p>
+        <p class="card-desc">${escapeHtml(description)}</p>
         <div class="tag-list">${tagsHtml}</div>
       </div>
       <div class="card-action-bar">
@@ -172,6 +221,8 @@ function initProjectDetail() {
   const techStackBadges = project.techStack
     .map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`)
     .join(' ');
+
+  const description = project.shortDesc || project.origin || 'Archived engineering project dossier.';
 
   container.innerHTML = `
     <!-- Top Dossier Identification -->
@@ -224,7 +275,7 @@ function initProjectDetail() {
     <h2 style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--scp-crimson); margin: 28px 0 12px;">
       1. PROJECT SUMMARY &amp; BACKGROUND
     </h2>
-    <p style="margin-bottom: 14px;"><strong>Operational Description:</strong> ${escapeHtml(project.shortDesc)}</p>
+    <p style="margin-bottom: 14px;"><strong>Operational Description:</strong> ${escapeHtml(description)}</p>
     <p style="margin-bottom: 20px;"><strong>Origin / Problem Statement:</strong> ${escapeHtml(project.origin || 'Technical exploration and problem-solving initiative.')}</p>
 
     <!-- Section 2: Contributions & Architecture -->
@@ -265,7 +316,7 @@ function renderDetailFallback(container) {
   `;
 }
 
-/* --- 7. Contact Terminal Simulation --- */
+/* --- 7. Contact Terminal & Direct Dispatch Relay --- */
 function initContactTerminal() {
   const form = document.getElementById('scp-contact-form');
   const terminalLog = document.getElementById('terminal-response-log');
@@ -274,17 +325,29 @@ function initContactTerminal() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const sender = document.getElementById('input-sender')?.value || 'AGENT-UNKNOWN';
+    const email = document.getElementById('input-email')?.value || '';
+    const message = document.getElementById('input-message')?.value || '';
+
+    // Construct mailto link with encoded subject & body
+    const mailSubject = encodeURIComponent(`[Dossier Contact] Message from ${sender}`);
+    const mailBody = encodeURIComponent(`From: ${sender} (${email})\n\nMessage Payload:\n${message}`);
+    const mailtoUrl = `mailto:yaqzhanfawwaz@gmail.com?subject=${mailSubject}&body=${mailBody}`;
 
     terminalLog.innerHTML = `
-      <div style="color: #39ff14; font-family: var(--font-mono); font-size: 0.8rem; margin-top: 14px; padding: 12px; background: #000; border: 1px solid #39ff14;">
-        &gt; TRANSMISSION INITIATED...<br>
-        &gt; ENCRYPTING PACKET FROM: ${escapeHtml(sender)}<br>
-        &gt; DISPATCHING MESSAGE TO FAWWAZ YAQZHAN [DIRECT MAIL RELAY]...<br>
-        &gt; STATUS: 200 OK - THANK YOU! MESSAGE STORED SUCCESSFULLY.<br>
-        &gt; <i>Feel free to also reach out directly via official email: yaqzhanfawwaz@gmail.com</i>
+      <div style="color: #39ff14; font-family: var(--font-mono); font-size: 0.8rem; margin-top: 14px; padding: 14px; background: #000; border: 1px solid #39ff14; line-height: 1.6;">
+        &gt; TRANSMISSION PACKET ENCRYPTED [SUCCESS]<br>
+        &gt; SENDER: ${escapeHtml(sender)} &lt;${escapeHtml(email)}&gt;<br>
+        &gt; DISPATCH STATUS: READY FOR CARRIER RELAY.<br>
+        <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed #39ff14;">
+          <a href="${mailtoUrl}" class="btn-dossier" style="background: #39ff14; color: #000; font-weight: 700; border-color: #39ff14; text-decoration: none; display: inline-block;">
+            &gt;&gt; DISPATCH VIA EMAIL CLIENT NOW &rarr;
+          </a>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.72rem; color: #9ca3af;">
+          *Clicking the button above opens your mail client directly addressed to <strong>yaqzhanfawwaz@gmail.com</strong> with your message pre-loaded.
+        </p>
       </div>
     `;
-    form.reset();
   });
 }
 
