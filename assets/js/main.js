@@ -129,7 +129,7 @@ function initProjectsCatalog() {
     
     if (filtered.length === 0) {
       container.innerHTML = `
-        <div class="scp-warning-box" style="grid-column: 1 / -1;">
+        <div class="scp-warning-box grid-full-width">
           <strong>[EMPTY ARCHIVE]</strong>
           No project files were found matching this classification category.
         </div>
@@ -279,22 +279,22 @@ function initProjectDetail() {
     </div>
 
     <!-- Section 1: Overview & Origin -->
-    <h2 style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--scp-crimson); margin: 28px 0 12px;">
+    <h2 class="detail-section-title">
       1. PROJECT SUMMARY &amp; BACKGROUND
     </h2>
-    <p style="margin-bottom: 14px;"><strong>Operational Description:</strong> ${escapeHtml(description)}</p>
-    <p style="margin-bottom: 20px;"><strong>Origin / Problem Statement:</strong> ${escapeHtml(project.origin || 'Technical exploration and problem-solving initiative.')}</p>
+    <p class="lead-text"><strong>Operational Description:</strong> ${escapeHtml(description)}</p>
+    <p class="section-intro"><strong>Origin / Problem Statement:</strong> ${escapeHtml(project.origin || 'Technical exploration and problem-solving initiative.')}</p>
 
     <!-- Section 2: Contributions & Architecture -->
-    <h2 style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--scp-crimson); margin: 28px 0 12px;">
+    <h2 class="detail-section-title">
       2. CONTRIBUTION LOG &amp; SYSTEM IMPLEMENTATION
     </h2>
-    <ul style="padding-left: 20px; margin-bottom: 24px;">
+    <ul class="detail-list">
       ${contributionsList}
     </ul>
 
     <!-- Section 3: Addenda / Development Notes -->
-    <h2 style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--scp-crimson); margin: 28px 0 12px;">
+    <h2 class="detail-section-title">
       3. ADDENDUM / SPECIAL DEVELOPMENT NOTES
     </h2>
     <div class="addendum-box">
@@ -303,7 +303,7 @@ ${escapeHtml(project.addendum || '[LOG ENTRY]: No technical anomalies recorded.'
     </div>
 
     <!-- Actions -->
-    <div style="margin-top: 36px; padding-top: 20px; border-top: 2px solid var(--scp-border-light); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    <div class="dossier-nav-footer">
       <a href="proyek.html" class="btn-dossier">&larr; Back to Project Catalog</a>
       ${project.githubUrl ? `<a href="${escapeHtml(project.githubUrl)}" target="_blank" rel="noopener noreferrer" class="btn-dossier btn-dossier-secondary">Open GitHub Repository &rarr;</a>` : ''}
     </div>
@@ -372,12 +372,12 @@ ${message}
           <button type="button" class="terminal-action-btn terminal-action-btn-outline" id="btn-copy-payload">
             [COPY PAYLOAD &amp; EMAIL]
           </button>
-          <button type="button" class="terminal-action-btn terminal-action-btn-outline" id="btn-clear-terminal" style="margin-left: auto;">
+          <button type="button" class="terminal-action-btn terminal-action-btn-outline btn-align-right" id="btn-clear-terminal">
             [CLEAR]
           </button>
         </div>
 
-        <div id="terminal-feedback" style="margin-top: 8px; font-size: 0.72rem; color: #9ca3af;">
+        <div id="terminal-feedback" class="terminal-feedback-text">
           *Click <strong>OPEN EMAIL CLIENT</strong> to launch your mail application, or click <strong>COPY PAYLOAD</strong> to manually paste into Gmail / Webmail.
         </div>
       </div>
@@ -406,14 +406,12 @@ ${message}
             document.body.removeChild(textarea);
           }
           copyBtn.textContent = 'COPIED TO CLIPBOARD [OK]!';
-          copyBtn.style.borderColor = '#39ff14';
-          copyBtn.style.color = '#39ff14';
           if (feedbackText) {
-            feedbackText.innerHTML = `<span style="color: #39ff14;">&gt; Transmission payload copied to clipboard! You can paste it directly into Gmail or your webmail to send to <strong>${escapeHtml(targetEmail)}</strong>.</span>`;
+            feedbackText.innerHTML = `<span class="text-terminal-success">&gt; Transmission payload copied to clipboard! You can paste it directly into Gmail or your webmail to send to <strong>${escapeHtml(targetEmail)}</strong>.</span>`;
           }
         } catch (err) {
           if (feedbackText) {
-            feedbackText.innerHTML = `<span style="color: #f87171;">&gt; Unable to auto-copy. Please send manually to ${escapeHtml(targetEmail)}.</span>`;
+            feedbackText.innerHTML = `<span class="text-terminal-danger">&gt; Unable to auto-copy. Please send manually to ${escapeHtml(targetEmail)}.</span>`;
           }
         }
       });
