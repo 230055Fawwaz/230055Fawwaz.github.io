@@ -55,25 +55,32 @@ function initMobileNav() {
 }
 
 /* --- 2. Redacted Text Interactive Reveal (Mouse & Keyboard) --- */
-function initRedactedText() {
-  const redactedElements = document.querySelectorAll('.redacted');
+function initRedactedText(root = document) {
+  const redactedElements = root.querySelectorAll('.redacted:not([data-redacted-bound="true"])');
   redactedElements.forEach(el => {
+    // Mark as bound to prevent duplicate event listener attachments
+    el.setAttribute('data-redacted-bound', 'true');
+
     // Accessibility attributes
     el.setAttribute('tabindex', '0');
     el.setAttribute('role', 'button');
+    el.setAttribute('aria-expanded', el.classList.contains('revealed') ? 'true' : 'false');
     el.setAttribute('title', 'CLASSIFIED: Click or press Enter to declassify text.');
     el.setAttribute('aria-label', 'Classified text: click or press Enter to declassify');
 
+    function toggleRedaction() {
+      const isRevealed = el.classList.toggle('revealed');
+      el.setAttribute('aria-expanded', isRevealed ? 'true' : 'false');
+    }
+
     // Click / touch handler
-    el.addEventListener('click', () => {
-      el.classList.toggle('revealed');
-    });
+    el.addEventListener('click', toggleRedaction);
 
     // Keyboard handler (Enter or Space)
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        el.classList.toggle('revealed');
+        toggleRedaction();
       }
     });
   });
@@ -104,7 +111,7 @@ function initFeaturedProjects() {
 
   const featured = getFeaturedProjects();
   container.innerHTML = featured.map(p => createProjectCardHtml(p)).join('');
-  initRedactedText();
+  initRedactedText(container);
 }
 
 /* --- 5. Render & Filter Projects on Projects Page (proyek.html) --- */
@@ -131,7 +138,7 @@ function initProjectsCatalog() {
     }
 
     container.innerHTML = filtered.map(p => createProjectCardHtml(p)).join('');
-    initRedactedText();
+    initRedactedText(container);
   }
 
   // Initial render
@@ -301,6 +308,7 @@ ${escapeHtml(project.addendum || '[LOG ENTRY]: No technical anomalies recorded.'
       ${project.githubUrl ? `<a href="${escapeHtml(project.githubUrl)}" target="_blank" rel="noopener noreferrer" class="btn-dossier btn-dossier-secondary">Open GitHub Repository &rarr;</a>` : ''}
     </div>
   `;
+  initRedactedText(container);
 }
 
 function renderDetailFallback(container) {
@@ -314,6 +322,7 @@ function renderDetailFallback(container) {
       ${all.map(p => createProjectCardHtml(p)).join('')}
     </div>
   `;
+  initRedactedText(container);
 }
 
 /* --- 7. Contact Terminal & Direct Dispatch Relay --- */
@@ -324,30 +333,108 @@ function initContactTerminal() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const sender = document.getElementById('input-sender')?.value || 'AGENT-UNKNOWN';
-    const email = document.getElementById('input-email')?.value || '';
-    const message = document.getElementById('input-message')?.value || '';
+    const sender = document.getElementById('input-sender')?.value.trim() || 'AGENT-UNKNOWN';
+    const email = document.getElementById('input-email')?.value.trim() || '';
+    const message = document.getElementById('input-message')?.value.trim() || '';
 
-    // Construct mailto link with encoded subject & body
-    const mailSubject = encodeURIComponent(`[Dossier Contact] Message from ${sender}`);
-    const mailBody = encodeURIComponent(`From: ${sender} (${email})\n\nMessage Payload:\n${message}`);
-    const mailtoUrl = `mailto:yaqzhanfawwaz@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+    const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    const targetEmail = 'yaqzhanfawwaz@gmail.com';
 
+    // Construct formatted transmission payload
+    const mailSubject = `[Dossier Contact] Transmission from ${sender}`;
+    const payloadText = `[SECURE TRANSMISSION LOG]
+TIMESTAMP: ${timestamp} UTC
+SENDER: ${sender}
+EMAIL: ${email}
+RECIPIENT: ${targetEmail}
+
+--- MESSAGE PAYLOAD ---
+${message}
+-----------------------`;
+
+    const mailSubjectEncoded = encodeURIComponent(mailSubject);
+    const mailBodyEncoded = encodeURIComponent(payloadText);
+    const mailtoUrl = `mailto:${targetEmail}?subject=${mailSubjectEncoded}&body=${mailBodyEncoded}`;
+
+    // Render interactive dispatch report with both mailto and clipboard options
     terminalLog.innerHTML = `
-      <div style="color: #39ff14; font-family: var(--font-mono); font-size: 0.8rem; margin-top: 14px; padding: 14px; background: #000; border: 1px solid #39ff14; line-height: 1.6;">
-        &gt; TRANSMISSION PACKET ENCRYPTED [SUCCESS]<br>
-        &gt; SENDER: ${escapeHtml(sender)} &lt;${escapeHtml(email)}&gt;<br>
-        &gt; DISPATCH STATUS: READY FOR CARRIER RELAY.<br>
-        <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed #39ff14;">
-          <a href="${mailtoUrl}" class="btn-dossier" style="background: #39ff14; color: #000; font-weight: 700; border-color: #39ff14; text-decoration: none; display: inline-block;">
-            &gt;&gt; DISPATCH VIA EMAIL CLIENT NOW &rarr;
+      <div class="terminal-log-box" role="status" aria-live="polite">
+        <div>&gt; STATUS: TRANSMISSION PACKET ENCRYPTED [200 OK]</div>
+        <div>&gt; TIMESTAMP: ${escapeHtml(timestamp)} UTC</div>
+        <div>&gt; SENDER: ${escapeHtml(sender)} &lt;${escapeHtml(email)}&gt;</div>
+        <div>&gt; TARGET RECIPIENT: ${escapeHtml(targetEmail)}</div>
+        <div>&gt; PAYLOAD SIZE: ${payloadText.length} BYTES VERIFIED</div>
+        
+        <div class="terminal-actions-group">
+          <a href="${mailtoUrl}" class="terminal-action-btn" id="btn-open-mail">
+            &gt;&gt; OPEN EMAIL CLIENT &rarr;
           </a>
+          <button type="button" class="terminal-action-btn terminal-action-btn-outline" id="btn-copy-payload">
+            [COPY PAYLOAD &amp; EMAIL]
+          </button>
+          <button type="button" class="terminal-action-btn terminal-action-btn-outline" id="btn-clear-terminal" style="margin-left: auto;">
+            [CLEAR]
+          </button>
         </div>
-        <p style="margin-top: 8px; font-size: 0.72rem; color: #9ca3af;">
-          *Clicking the button above opens your mail client directly addressed to <strong>yaqzhanfawwaz@gmail.com</strong> with your message pre-loaded.
-        </p>
+
+        <div id="terminal-feedback" style="margin-top: 8px; font-size: 0.72rem; color: #9ca3af;">
+          *Click <strong>OPEN EMAIL CLIENT</strong> to launch your mail application, or click <strong>COPY PAYLOAD</strong> to manually paste into Gmail / Webmail.
+        </div>
       </div>
     `;
+
+    // Clipboard copy handler
+    const copyBtn = document.getElementById('btn-copy-payload');
+    const feedbackText = document.getElementById('terminal-feedback');
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const textToCopy = `To: ${targetEmail}\nSubject: ${mailSubject}\n\n${payloadText}`;
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(textToCopy);
+          } else {
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+          }
+          copyBtn.textContent = 'COPIED TO CLIPBOARD [OK]!';
+          copyBtn.style.borderColor = '#39ff14';
+          copyBtn.style.color = '#39ff14';
+          if (feedbackText) {
+            feedbackText.innerHTML = `<span style="color: #39ff14;">&gt; Transmission payload copied to clipboard! You can paste it directly into Gmail or your webmail to send to <strong>${escapeHtml(targetEmail)}</strong>.</span>`;
+          }
+        } catch (err) {
+          if (feedbackText) {
+            feedbackText.innerHTML = `<span style="color: #f87171;">&gt; Unable to auto-copy. Please send manually to ${escapeHtml(targetEmail)}.</span>`;
+          }
+        }
+      });
+    }
+
+    // Clear terminal handler
+    const clearBtn = document.getElementById('btn-clear-terminal');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        terminalLog.innerHTML = '';
+        form.reset();
+        document.getElementById('input-sender')?.focus();
+      });
+    }
+
+    // Attempt opening mailto link automatically in browser
+    try {
+      window.location.href = mailtoUrl;
+    } catch (err) {
+      // Ignored if browser blocks navigation
+    }
   });
 }
 
