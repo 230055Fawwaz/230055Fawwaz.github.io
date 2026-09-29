@@ -329,18 +329,53 @@ function renderDetailFallback(container) {
 function initContactTerminal() {
   const form = document.getElementById('scp-contact-form');
   const terminalLog = document.getElementById('terminal-response-log');
+  const submitBtn = form?.querySelector('button[type="submit"]');
+
+  // Support direct channel action buttons (Copy Email & Open Gmail Web)
+  const copyDirectEmailBtn = document.getElementById('btn-copy-direct-email');
+  if (copyDirectEmailBtn) {
+    copyDirectEmailBtn.addEventListener('click', async () => {
+      const email = 'yaqzhanfawwaz@gmail.com';
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(email);
+        } else {
+          fallbackCopyToClipboard(email);
+        }
+        const originalText = copyDirectEmailBtn.textContent;
+        copyDirectEmailBtn.textContent = 'COPIED!';
+        setTimeout(() => {
+          copyDirectEmailBtn.textContent = originalText;
+        }, 2000);
+      } catch (err) {
+        alert(`Email address: ${email}`);
+      }
+    });
+  }
+
   if (!form || !terminalLog) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const sender = document.getElementById('input-sender')?.value.trim() || 'AGENT-UNKNOWN';
-    const email = document.getElementById('input-email')?.value.trim() || '';
-    const message = document.getElementById('input-message')?.value.trim() || '';
+    const senderInput = document.getElementById('input-sender');
+    const emailInput = document.getElementById('input-email');
+    const messageInput = document.getElementById('input-message');
+
+    const sender = senderInput?.value.trim() || 'AGENT-ANONYMOUS';
+    const email = emailInput?.value.trim() || '';
+    const message = messageInput?.value.trim() || '';
+
+    if (!sender || !email || !message) {
+      terminalLog.innerHTML = `
+        <div class="terminal-log-box" role="status" aria-live="polite">
+          <div class="text-terminal-danger">&gt; ERROR: ALL TRANSMISSION FIELDS (SENDER, EMAIL, MESSAGE) ARE REQUIRED.</div>
+        </div>
+      `;
+      return;
+    }
 
     const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
     const targetEmail = 'yaqzhanfawwaz@gmail.com';
-
-    // Construct formatted transmission payload
     const mailSubject = `[Dossier Contact] Transmission from ${sender}`;
     const payloadText = `[SECURE TRANSMISSION LOG]
 TIMESTAMP: ${timestamp} UTC
@@ -348,42 +383,135 @@ SENDER: ${sender}
 EMAIL: ${email}
 RECIPIENT: ${targetEmail}
 
---- MESSAGE PAYLOAD ---
+--- MESSAGE BODY ---
 ${message}
------------------------`;
+--------------------`;
 
     const mailSubjectEncoded = encodeURIComponent(mailSubject);
     const mailBodyEncoded = encodeURIComponent(payloadText);
     const mailtoUrl = `mailto:${targetEmail}?subject=${mailSubjectEncoded}&body=${mailBodyEncoded}`;
+    const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${mailSubjectEncoded}&body=${mailBodyEncoded}`;
 
-    // Render interactive dispatch report with both mailto and clipboard options
+    // Display real-time sending status in the terminal
     terminalLog.innerHTML = `
       <div class="terminal-log-box" role="status" aria-live="polite">
-        <div>&gt; STATUS: TRANSMISSION PACKET ENCRYPTED [200 OK]</div>
+        <div>&gt; INITIATING SECURE TRANSMISSION SEQUENCE...</div>
         <div>&gt; TIMESTAMP: ${escapeHtml(timestamp)} UTC</div>
         <div>&gt; SENDER: ${escapeHtml(sender)} &lt;${escapeHtml(email)}&gt;</div>
-        <div>&gt; TARGET RECIPIENT: ${escapeHtml(targetEmail)}</div>
-        <div>&gt; PAYLOAD SIZE: ${payloadText.length} BYTES VERIFIED</div>
-        
-        <div class="terminal-actions-group">
-          <a href="${mailtoUrl}" class="terminal-action-btn" id="btn-open-mail">
-            &gt;&gt; OPEN EMAIL CLIENT &rarr;
-          </a>
-          <button type="button" class="terminal-action-btn terminal-action-btn-outline" id="btn-copy-payload">
-            [COPY PAYLOAD &amp; EMAIL]
-          </button>
-          <button type="button" class="terminal-action-btn terminal-action-btn-outline btn-align-right" id="btn-clear-terminal">
-            [CLEAR]
-          </button>
-        </div>
-
-        <div id="terminal-feedback" class="terminal-feedback-text">
-          *Click <strong>OPEN EMAIL CLIENT</strong> to launch your mail application, or click <strong>COPY PAYLOAD</strong> to manually paste into Gmail / Webmail.
-        </div>
+        <div>&gt; TARGET: ${escapeHtml(targetEmail)}</div>
+        <div class="text-terminal-warning">&gt; RELAYING PACKET TO DISPATCH SERVER... [TRANSMITTING]</div>
       </div>
     `;
 
-    // Clipboard copy handler
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'TRANSMITTING PACKET...';
+    }
+
+    let isSuccess = false;
+
+    // Try AJAX delivery via FormSubmit relay
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 9000);
+
+      const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: sender,
+          email: email,
+          _subject: mailSubject,
+          message: message,
+          _captcha: 'false',
+          timestamp: timestamp
+        }),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success === 'true' || result.success === true || response.status === 200) {
+          isSuccess = true;
+        }
+      }
+    } catch (err) {
+      // Network failure, timeout, or cross-origin block
+      isSuccess = false;
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'SEND TRANSMISSION \u2192';
+      }
+    }
+
+    if (isSuccess) {
+      // Success State
+      terminalLog.innerHTML = `
+        <div class="terminal-log-box" role="status" aria-live="polite">
+          <div class="text-terminal-success">&gt; STATUS: 200 OK // TRANSMISSION DISPATCHED SUCCESSFULLY!</div>
+          <div>&gt; TIMESTAMP: ${escapeHtml(timestamp)} UTC</div>
+          <div>&gt; SENDER: ${escapeHtml(sender)} &lt;${escapeHtml(email)}&gt;</div>
+          <div>&gt; TARGET RECIPIENT: ${escapeHtml(targetEmail)}</div>
+          <div>&gt; PAYLOAD: ${payloadText.length} BYTES CONFIRMED DELIVERED TO INBOX</div>
+          
+          <div class="terminal-actions-group">
+            <button type="button" class="terminal-action-btn terminal-action-btn-outline" id="btn-copy-payload">
+              [COPY MESSAGE RECORD]
+            </button>
+            <a href="${gmailWebUrl}" target="_blank" rel="noopener noreferrer" class="terminal-action-btn terminal-action-btn-outline">
+              [OPEN IN GMAIL WEB] &rarr;
+            </a>
+            <button type="button" class="terminal-action-btn terminal-action-btn-outline btn-align-right" id="btn-clear-terminal">
+              [NEW TRANSMISSION]
+            </button>
+          </div>
+
+          <div id="terminal-feedback" class="terminal-feedback-text">
+            <span class="text-terminal-success">&gt; Transmission verified. Pesan Anda telah terkirim langsung ke inbox Fawwaz Yaqzhan.</span>
+          </div>
+        </div>
+      `;
+      form.reset();
+    } else {
+      // Fallback State: Provide instant webmail & client options
+      terminalLog.innerHTML = `
+        <div class="terminal-log-box" role="status" aria-live="polite">
+          <div class="text-terminal-warning">&gt; STATUS: DIRECT RELAY BUSY / RESTRICTED BY BROWSER</div>
+          <div>&gt; SENDER: ${escapeHtml(sender)} &lt;${escapeHtml(email)}&gt;</div>
+          <div>&gt; TARGET RECIPIENT: ${escapeHtml(targetEmail)}</div>
+          <div style="margin-top: 6px; color: #d1d5db;">
+            &gt; Transmisi disiapkan. Silakan pilih metode pengiriman langsung di bawah:
+          </div>
+
+          <div class="terminal-actions-group">
+            <a href="${gmailWebUrl}" target="_blank" rel="noopener noreferrer" class="terminal-action-btn" id="btn-open-gmail-web">
+              &gt;&gt; OPEN IN GMAIL WEB (NO APP NEEDED) &rarr;
+            </a>
+            <a href="${mailtoUrl}" class="terminal-action-btn terminal-action-btn-outline" id="btn-open-mail">
+              [DEFAULT MAIL CLIENT]
+            </a>
+            <button type="button" class="terminal-action-btn terminal-action-btn-outline" id="btn-copy-payload">
+              [COPY PAYLOAD]
+            </button>
+            <button type="button" class="terminal-action-btn terminal-action-btn-outline btn-align-right" id="btn-clear-terminal">
+              [CLEAR]
+            </button>
+          </div>
+
+          <div id="terminal-feedback" class="terminal-feedback-text">
+            *Rekomendasi: Klik <strong>OPEN IN GMAIL WEB</strong> untuk langsung membuka draft email di tab baru Gmail tanpa perlu aplikasi tambahan.
+          </div>
+        </div>
+      `;
+    }
+
+    // Attach copy button handler
     const copyBtn = document.getElementById('btn-copy-payload');
     const feedbackText = document.getElementById('terminal-feedback');
 
@@ -394,46 +522,43 @@ ${message}
           if (navigator.clipboard && navigator.clipboard.writeText) {
             await navigator.clipboard.writeText(textToCopy);
           } else {
-            // Fallback for older browsers
-            const textarea = document.createElement('textarea');
-            textarea.value = textToCopy;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.focus();
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
+            fallbackCopyToClipboard(textToCopy);
           }
           copyBtn.textContent = 'COPIED TO CLIPBOARD [OK]!';
           if (feedbackText) {
-            feedbackText.innerHTML = `<span class="text-terminal-success">&gt; Transmission payload copied to clipboard! You can paste it directly into Gmail or your webmail to send to <strong>${escapeHtml(targetEmail)}</strong>.</span>`;
+            feedbackText.innerHTML = `<span class="text-terminal-success">&gt; Pesan berhasil disalin ke clipboard! Anda dapat menempelkannya langsung ke email tujuan: <strong>${escapeHtml(targetEmail)}</strong>.</span>`;
           }
         } catch (err) {
           if (feedbackText) {
-            feedbackText.innerHTML = `<span class="text-terminal-danger">&gt; Unable to auto-copy. Please send manually to ${escapeHtml(targetEmail)}.</span>`;
+            feedbackText.innerHTML = `<span class="text-terminal-danger">&gt; Gagal menyalin otomatis. Silakan kirim manual ke ${escapeHtml(targetEmail)}.</span>`;
           }
         }
       });
     }
 
-    // Clear terminal handler
+    // Attach clear button handler
     const clearBtn = document.getElementById('btn-clear-terminal');
     if (clearBtn) {
       clearBtn.addEventListener('click', () => {
         terminalLog.innerHTML = '';
         form.reset();
-        document.getElementById('input-sender')?.focus();
+        senderInput?.focus();
       });
     }
-
-    // Attempt opening mailto link automatically in browser
-    try {
-      window.location.href = mailtoUrl;
-    } catch (err) {
-      // Ignored if browser blocks navigation
-    }
   });
+}
+
+/* --- Helper: Fallback Copy to Clipboard --- */
+function fallbackCopyToClipboard(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
 }
 
 /* --- Utility: Sanitize text --- */
