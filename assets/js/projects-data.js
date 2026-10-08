@@ -73,7 +73,7 @@ const PROJECTS_DATA = [
     techStack: ["Flask", "Python", "SQLite", "Chart.js", "Jinja2 HTML", "CSS", "Batch Files"],
     githubUrl: "https://github.com/230055Fawwaz/MyFinance",
     featured: true,
-    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    thumbnail: "assets/images/projects/myfinance-cover.png",
     screenshots: [
       // {
       //   url: "assets/images/projects/myfinance-dashboard.png",
