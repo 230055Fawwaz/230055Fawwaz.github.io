@@ -170,9 +170,26 @@ function createProjectCardHtml(project) {
 
   const description = project.shortDesc || project.origin || 'Archived engineering project dossier.';
 
+  const thumbnailHtml = project.thumbnail
+    ? `
+      <div class="card-thumbnail-wrap">
+        <img 
+          src="${escapeHtml(project.thumbnail)}" 
+          alt="Thumbnail preview for ${escapeHtml(project.title)}" 
+          class="card-thumbnail-img" 
+          loading="lazy" 
+          decoding="async"
+          onerror="this.closest('.card-thumbnail-wrap').style.display='none';"
+        />
+        <span class="card-thumbnail-tag">EXHIBIT IDENTIFIER</span>
+      </div>
+    `
+    : '';
+
   return `
     <article class="dossier-card">
-      <div>
+      ${thumbnailHtml}
+      <div class="card-body">
         <div class="card-meta-bar">
           <span class="card-item-code">${escapeHtml(project.itemNumber)}</span>
           <span class="card-class-badge">${escapeHtml(project.classification)}</span>
@@ -231,6 +248,61 @@ function initProjectDetail() {
 
   const description = project.shortDesc || project.origin || 'Archived engineering project dossier.';
 
+  // Process screenshots for visual exhibits section
+  const rawScreenshots = project.screenshots || [];
+  const screenshots = Array.isArray(rawScreenshots)
+    ? rawScreenshots.map((item, idx) => {
+        if (typeof item === 'string') {
+          return { url: item, caption: `EXHIBIT ${String(idx + 1).padStart(2, '0')}: Interface Telemetry Record` };
+        }
+        return item;
+      })
+    : (typeof rawScreenshots === 'string' ? [{ url: rawScreenshots, caption: 'EXHIBIT 01: Interface Telemetry Record' }] : []);
+
+  const hasExhibits = screenshots.length > 0;
+  let exhibitsSectionHtml = '';
+
+  if (hasExhibits) {
+    const exhibitsGrid = screenshots.map((item, idx) => {
+      const exhibitNum = String(idx + 1).padStart(2, '0');
+      const captionText = item.caption || `Visual Telemetry Record ${exhibitNum}`;
+      return `
+        <figure class="dossier-exhibit-card" data-full-img="${escapeHtml(item.url)}" data-caption="${escapeHtml(captionText)}">
+          <div class="exhibit-img-frame">
+            <span class="exhibit-stamp-watermark">DECLASSIFIED</span>
+            <img 
+              src="${escapeHtml(item.url)}" 
+              alt="${escapeHtml(captionText)}" 
+              class="exhibit-screenshot-img" 
+              loading="lazy" 
+              decoding="async" 
+            />
+            <div class="exhibit-hover-hint">
+              <span class="hint-badge">&#x1F50D; INSPECT EXHIBIT</span>
+            </div>
+          </div>
+          <figcaption class="exhibit-caption">
+            <span class="exhibit-tag">[EXHIBIT-${exhibitNum}]</span>
+            <span class="exhibit-text">${escapeHtml(captionText)}</span>
+          </figcaption>
+        </figure>
+      `;
+    }).join('');
+
+    exhibitsSectionHtml = `
+      <!-- Section: Visual Evidence & Interface Exhibits -->
+      <h2 class="detail-section-title">
+        2. VISUAL EXHIBITS &amp; INTERFACE SCREENSHOTS
+      </h2>
+      <div class="dossier-exhibits-grid">
+        ${exhibitsGrid}
+      </div>
+    `;
+  }
+
+  const contributionSectionNumber = hasExhibits ? '3' : '2';
+  const addendumSectionNumber = hasExhibits ? '4' : '3';
+
   container.innerHTML = `
     <!-- Top Dossier Identification -->
     <div class="dossier-header-strip">
@@ -285,17 +357,19 @@ function initProjectDetail() {
     <p class="lead-text"><strong>Operational Description:</strong> ${escapeHtml(description)}</p>
     <p class="section-intro"><strong>Origin / Problem Statement:</strong> ${escapeHtml(project.origin || 'Technical exploration and problem-solving initiative.')}</p>
 
-    <!-- Section 2: Contributions & Architecture -->
+    ${exhibitsSectionHtml}
+
+    <!-- Section: Contributions & Architecture -->
     <h2 class="detail-section-title">
-      2. CONTRIBUTION LOG &amp; SYSTEM IMPLEMENTATION
+      ${contributionSectionNumber}. CONTRIBUTION LOG &amp; SYSTEM IMPLEMENTATION
     </h2>
     <ul class="detail-list">
       ${contributionsList}
     </ul>
 
-    <!-- Section 3: Addenda / Development Notes -->
+    <!-- Section: Addenda / Development Notes -->
     <h2 class="detail-section-title">
-      3. ADDENDUM / SPECIAL DEVELOPMENT NOTES
+      ${addendumSectionNumber}. ADDENDUM / SPECIAL DEVELOPMENT NOTES
     </h2>
     <div class="addendum-box">
 ${escapeHtml(project.addendum || '[LOG ENTRY]: No technical anomalies recorded.')}
@@ -309,6 +383,61 @@ ${escapeHtml(project.addendum || '[LOG ENTRY]: No technical anomalies recorded.'
     </div>
   `;
   initRedactedText(container);
+  initExhibitLightbox();
+}
+
+/* --- Helper: Interactive High-Resolution Exhibit Lightbox --- */
+function initExhibitLightbox() {
+  const dialog = document.getElementById('dossier-lightbox-modal');
+  if (!dialog) return;
+
+  const closeBtn = document.getElementById('lightbox-close-btn');
+  const imgEl = document.getElementById('lightbox-image');
+  const captionEl = document.getElementById('lightbox-caption');
+
+  if (closeBtn && !closeBtn.dataset.bound) {
+    closeBtn.dataset.bound = 'true';
+    closeBtn.addEventListener('click', () => dialog.close());
+  }
+
+  if (!dialog.dataset.bound) {
+    dialog.dataset.bound = 'true';
+    dialog.addEventListener('click', (e) => {
+      // Close when clicking directly on the backdrop outside the container
+      if (e.target === dialog) {
+        dialog.close();
+      }
+    });
+  }
+
+  const exhibitCards = document.querySelectorAll('.dossier-exhibit-card');
+  exhibitCards.forEach(card => {
+    function openModal() {
+      const fullSrc = card.getAttribute('data-full-img');
+      const caption = card.getAttribute('data-caption') || '';
+      if (!fullSrc) return;
+
+      if (imgEl) {
+        imgEl.src = fullSrc;
+        imgEl.alt = caption || 'High resolution exhibit screenshot';
+      }
+      if (captionEl) {
+        captionEl.textContent = caption;
+      }
+      dialog.showModal();
+    }
+
+    card.addEventListener('click', openModal);
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `Inspect exhibit screenshot: ${card.getAttribute('data-caption') || ''}`);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal();
+      }
+    });
+  });
 }
 
 function renderDetailFallback(container) {

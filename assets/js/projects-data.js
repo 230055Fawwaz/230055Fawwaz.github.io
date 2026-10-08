@@ -1,6 +1,31 @@
 /**
  * PROJECT DATABASE - FAWWAZ YAQZHAN ARCHIVE
  * Format: SCP Document Dossier Registry
+ * 
+ * ============================================================================
+ * PANDUAN PENAMBAHAN GAMBAR & SCREENSHOT:
+ * ============================================================================
+ * 1. Simpan file gambar Anda di folder: assets/images/projects/
+ * 2. thumbnail:
+ *    - Ditampilkan pada KARTU DAFTAR PROYEK (di index.html & proyek.html).
+ *    - Contoh: thumbnail: "assets/images/projects/myfinance-thumb.png"
+ *    - Jika dikosongkan (""), kartu akan tampil elegan tanpa gambar.
+ * 3. screenshots:
+ *    - Ditampilkan pada HALAMAN DETAIL PROYEK (proyek-detail.html).
+ *    - Merupakan array screenshot yang dapat diklik untuk diperbesar (lightbox).
+ *    - Format:
+ *      screenshots: [
+ *        {
+ *          url: "assets/images/projects/myfinance-overview.png",
+ *          caption: "EXHIBIT 01: Overview Dashboard & Cash Flow Tracker"
+ *        },
+ *        {
+ *          url: "assets/images/projects/myfinance-analytics.png",
+ *          caption: "EXHIBIT 02: Monthly Expense Breakdown Chart"
+ *        }
+ *      ]
+ *    - Jika array kosong ([]), halaman detail akan menampilkan status arsip teks biasa.
+ * ============================================================================
  */
 const PROJECTS_DATA = [
   {
@@ -15,6 +40,13 @@ const PROJECTS_DATA = [
     techStack: ["Node.js", "Express", "Next.js", "PostgreSQL (Supabase)", "Pinecone", "Gemini API", "Midtrans"],
     githubUrl: "https://github.com/davidchristt/TanyaHukum",
     featured: false,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    screenshots: [
+      // {
+      //   url: "assets/images/projects/tanyahukum-preview.png",
+      //   caption: "EXHIBIT 01: AI Legal Consultation Interface & Query Flow"
+      // }
+    ],
     shortDesc: "An intelligent legal consultation platform utilizing AI retrieval and robust backend authentication for civil law inquiries.",
     origin: "Collaborative academic capstone project to develop an intelligent legal consultation assistant for civil law inquiries.",
     contributions: [
@@ -41,6 +73,13 @@ const PROJECTS_DATA = [
     techStack: ["Flask", "Python", "SQLite", "Chart.js", "Jinja2 HTML", "CSS", "Batch Files"],
     githubUrl: "https://github.com/230055Fawwaz/MyFinance",
     featured: true,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    screenshots: [
+      // {
+      //   url: "assets/images/projects/myfinance-dashboard.png",
+      //   caption: "EXHIBIT 01: Interactive Cash Flow & Expense Dashboard"
+      // }
+    ],
     shortDesc: "Lightweight financial dashboard engineered to track, categorize, and visualize monthly student cash flows with Chart.js.",
     origin: "Personal software solution developed to systematically record and analyze monthly student expenditures.",
     contributions: [
@@ -66,6 +105,13 @@ const PROJECTS_DATA = [
     techStack: ["Python", "Flask", "Ollama", "Qwen 2.5", "SQLite-Vector", "HTML/CSS/JS"],
     githubUrl: "https://github.com/230055Fawwaz",
     featured: false,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    screenshots: [
+      // {
+      //   url: "assets/images/projects/chatbot-jkkd-preview.png",
+      //   caption: "EXHIBIT 01: Offline RAG Terminal Interface & Quantized Query Pipeline"
+      // }
+    ],
     shortDesc: "Edge-computed RAG AI study companion running open-source Qwen 2.5 via Ollama for computer networks coursework.",
     origin: "Academic initiative to build an intelligent study companion tailored for Computer Networks & Data Communication coursework.",
     contributions: [
@@ -91,6 +137,13 @@ const PROJECTS_DATA = [
     techStack: ["GNS3", "NGFW (Fortinet/PFSense)", "BGP", "OSPF", "CDN Proxy"],
     githubUrl: "https://github.com/230055Fawwaz/tugas-jaringan-komputer",
     featured: false,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    screenshots: [
+      // {
+      //   url: "assets/images/projects/enterprise-cdn-topology.png",
+      //   caption: "EXHIBIT 01: Multi-Region BGP Network Topology Simulation"
+      // }
+    ],
     shortDesc: "Multi-region enterprise network simulation featuring BGP routing, NGFW packet inspection, and edge CDN distribution.",
     origin: "Capstone network engineering assignment designing enterprise-grade global network infrastructure.",
     contributions: [
@@ -116,6 +169,13 @@ const PROJECTS_DATA = [
     techStack: ["Cisco Packet Tracer", "IoT Gateway", "VLAN Segmentation", "Access Point"],
     githubUrl: "https://github.com/230055Fawwaz/tugas-jaringan-komputer",
     featured: false,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    screenshots: [
+      // {
+      //   url: "assets/images/projects/ritel-iot-topology.png",
+      //   caption: "EXHIBIT 01: Retail IoT Campus Topology & 802.1Q VLAN Schema"
+      // }
+    ],
     shortDesc: "Hierarchical campus network architecture integrating IoT sensor nodes and VLAN segmentation for retail environments.",
     origin: "Enterprise retail store network design featuring automated environmental sensor nodes and centralized surveillance.",
     contributions: [
@@ -141,6 +201,13 @@ const PROJECTS_DATA = [
     techStack: ["C#", "Unity 3D", "Meta Quest SDK", "VR Physics"],
     githubUrl: "https://github.com/Lukas166/mountain-journey-simulator",
     featured: false,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    screenshots: [
+      // {
+      //   url: "assets/images/projects/mountain-journey-vr.png",
+      //   caption: "EXHIBIT 01: 3D Immersive Environment & Locomotion Mechanics"
+      // }
+    ],
     shortDesc: "Immersive 3D virtual reality mental health simulation built in Unity 3D aligned with UN SDG 3.4.",
     origin: "Spatial computing game development supporting global mental health awareness under UN SDG 3.4.",
     contributions: [
@@ -165,6 +232,13 @@ const PROJECTS_DATA = [
     techStack: ["Microsoft Excel", "Pivot Tables", "Formulas", "Data Validation"],
     githubUrl: "https://github.com/230055Fawwaz/dashboard-keuangan-excel",
     featured: true,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    screenshots: [
+      // {
+      //   url: "assets/images/projects/excel-dashboard-sheet.png",
+      //   caption: "EXHIBIT 01: Automated Financial Model & Dynamic Pivot Charts"
+      // }
+    ],
     shortDesc: "Interactive financial management spreadsheet featuring automated cash flow tracking, Pivot tables, and dynamic dashboards.",
     origin: "Personal financial software solution developed to systematically log, categorize, and review personal cash flow and expenses.",
     contributions: [
