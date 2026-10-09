@@ -125,7 +125,10 @@ function initProjectsCatalog() {
   function renderList(category = 'all') {
     const filtered = category === 'all' 
       ? allProjects 
-      : allProjects.filter(p => p.category === category);
+      : allProjects.filter(p => {
+          if (category === 'web') return p.category === 'web' || p.category === 'exe';
+          return p.category === category;
+        });
     
     if (filtered.length === 0) {
       container.innerHTML = `

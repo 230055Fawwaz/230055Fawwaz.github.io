@@ -29,6 +29,41 @@
  */
 const PROJECTS_DATA = [
   {
+    id: "capital-hub",
+    itemNumber: "PROJ-07-IS-FI",
+    title: "Capital Hub - Upgraded MyFinance",
+    status: "ACTIVE INTERNAL TESTING",
+    classification: "INFORMATION SYSTEM | FINANCE | FORECASTER | CLASSIFIER",
+    semester: "Semester 7",
+    category: "exe",
+    role: "Fullstack Developer",
+    techStack: ["Flask", "Python", "Jinja2 HTML", "CSS", "JavaScript", "SQLite", "Nuitka Library"],
+    githubUrl: "NDA",
+    featured: true,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini, misal: "assets/images/projects/capitalhub-thumb.png"
+    screenshots: [
+      // Masukkan screenshot halaman detail di sini:
+      // {
+      //   url: "assets/images/projects/capitalhub-preview.png",
+      //   caption: "EXHIBIT 01: Main Application Interface & Forecasting Panel"
+      // }
+    ],
+    shortDesc: "An offline-first standalone Windows executable application engineered to record personal financial transactions with integrated on-device forecasting and classification AI models.",
+    origin: "An evolutionary leap from MyFinance, conceived to eliminate Python/batch environment dependencies and integrate offline predictive AI models into a self-contained native desktop executable.",
+    contributions: [
+      "Architected an offline-first desktop application combining Flask microservices, Jinja2 dynamic views, and an embedded SQLite database.",
+      "Engineered on-device AI algorithms for transaction auto-categorization and cash flow forecasting without cloud latency or third-party data transmission.",
+      "Constructed an optimized compilation pipeline using Nuitka to transpile Python source code into a standalone, native Windows executable (.exe).",
+      "Designed a simple zero-dependency setup wizard for seamless Windows desktop installation and distribution.",
+      "Conducted extensive daily self-testing (dogfooding) to evaluate local SQLite transaction reliability, process lifecycles, and model inference accuracy."
+    ],
+    uniqueNote: "Debut standalone executable (.exe) project currently in continuous personal dogfooding and internal testing, ensuring rock-solid local runtime stability, zero cloud dependency, and total data privacy before broader release.",
+    addendum: `
+      [LOG ENTRY 07-IS-FI-01]: Compiled standalone executable via Nuitka C-transpilation with bundled SQLite & Flask microservices.
+      [LOG ENTRY 07-IS-FI-02]: Internal dogfooding active; personal financial logs and predictive inference verified for offline runtime stability.
+    `
+  },
+  {
     id: "tanyahukum",
     itemNumber: "PROJ-06-AI-CH",
     title: "TanyaHukum - AI Legal Assistant",
@@ -264,7 +299,8 @@ function getFeaturedProjects() {
 
 function getProjectById(id) {
   if (!id) return null;
-  // Handle alias for backward-compatibility with excel-dahsboard typo
-  const targetId = id === "excel-dahsboard" ? "excel-dashboard" : id;
-  return PROJECTS_DATA.find(p => p.id === targetId) || null;
+  // Handle aliases and backward-compatibility
+  let targetId = id === "excel-dahsboard" ? "excel-dashboard" : id;
+  if (targetId === "Capital Hub") targetId = "capital-hub";
+  return PROJECTS_DATA.find(p => p.id === targetId || p.id.toLowerCase() === targetId.toLowerCase()) || null;
 }
