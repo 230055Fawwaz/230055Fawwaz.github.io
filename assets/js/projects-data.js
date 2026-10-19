@@ -29,6 +29,78 @@
  */
 const PROJECTS_DATA = [
   {
+    id: "channel-youtube",
+    itemNumber: "PROJ-07-YT-VI",
+    title: "Gaming Content Channel [REDACTED]",
+    status: "ACTIVE BROADCAST",
+    classification: "DIGITAL MEDIA | GAMEPLAY PRODUCTION & CURATION",
+    semester: "Semester 7 (Est. April 2026)",
+    category: "other",
+    role: "Solo Content Creator & Video Editor",
+    techStack: ["Video Editing", "OBS Studio", "Gameplay Capture", "Audio Mastering", "Content Curation", "Thumbnail Design"],
+    githubUrl: "NDA",
+    featured: true,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini, misal: "assets/images/projects/youtube-thumb.png"
+    screenshots: [
+      // Masukkan screenshot halaman detail di sini:
+      // {
+      //   url: "assets/images/projects/youtube-preview.png",
+      //   caption: "EXHIBIT 01: Channel Production Telemetry & Analytics Dashboard"
+      // }
+    ],
+    shortDesc: "A pseudonymously operated gaming content channel launched in April 2026, curating long-form gameplay, tactical walkthroughs, and mechanical analysis across indie, roguelike, and survival titles.",
+    origin: "An independent digital broadcasting and creative production experiment initiated to explore gameplay analysis, video editing workflows, and audience retention while maintaining complete creator pseudonymity.",
+    contributions: [
+      "Independently managed the full production lifecycle: high-resolution gameplay capture, audio mastering, pacing optimization, and video rendering.",
+      "Researched and produced deep-dive gameplay showcases and strategic walkthroughs for niche indie, roguelike, and tactical titles (Balatro, Darkwood, NIMRODS, Terraria, PlateUp!, Rebel Inc).",
+      "Streamlined capture workflows and input monitoring across both PC and mobile gaming environments (including Corebound, Blood Strike, and The Perfect Tower II).",
+      "Designed tailored thumbnail assets, pacing structures, and metadata tags to optimize viewer engagement while preserving personal privacy."
+    ],
+    uniqueNote: "Operated as a strictly confidential solo venture with public identity and direct channel identifiers withheld [REDACTED] to maintain creative independence and discretion.",
+    addendum: `
+      [LOG ENTRY 07-YT-VI-01]: Channel launched on April 5, 2026 under confidential creator moniker.
+      [LOG ENTRY 07-YT-VI-02]: Active game catalog indexed: NIMRODS: Guncraft Survivor, Magic Archery, The Perfect Tower II, Corebound (Mobile), Terraria, Blood Strike, Balatro, Rebel Inc: Escalation, PlateUp!, Caves Roguelike, Darkwood.
+      [LOG ENTRY 07-YT-VI-03]: Identity redaction protocols enforced per creator privacy directives.
+    `
+  },
+  {
+    id: "tanaman-mulia",
+    itemNumber: "PROJ-07-GA-XE",
+    title: "Tanaman Mulia - Mendelian Plant Breeding Game",
+    status: "ACTIVE DEVELOPMENT",
+    classification: "WINDOWS GAME | BOTANY & GENETICS SIMULATION | PYGAME-CE",
+    semester: "Semester 7",
+    category: "game",
+    role: "Game Developer & Gameplay Programmer",
+    techStack: ["Python", "Pygame-ce", "Mendelian Genetics Simulation", "OOP Architecture", "State Management", "Modular UI Engine"],
+    githubUrl: "NDA",
+    featured: true,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini, misal: "assets/images/projects/tanaman-mulia-thumb.png"
+    screenshots: [
+      // Masukkan screenshot halaman detail di sini:
+      // {
+      //   url: "assets/images/projects/tanaman-mulia-preview.png",
+      //   caption: "EXHIBIT 01: Garden Interface, Tomato Growth Cycle & Mendel Calculator"
+      // }
+    ],
+    shortDesc: "An educational botany and plant breeding simulation game built with Pygame-ce where players cultivate tomato crops, manage pollen banks, and execute cross-pollination adhering to Mendel's First and Second Laws.",
+    origin: "Conceived to translate theoretical Mendelian genetics into interactive gameplay mechanics, simulating multi-locus inheritance, commercial market contracts, pollen shelf-life, and multi-week plant lifecycles.",
+    contributions: [
+      "Architected an extensible n-locus Mendelian genetics engine calculating 4^n Punnett square combinations, allele segregation, genotype normalization, and phenotypic probability distributions.",
+      "Engineered realistic 4-week tomato growth lifecycles featuring multi-branch tree rendering, independent flower/fruit slot state machines, and autonomous natural self-pollination algorithms.",
+      "Developed a pollen preservation and banking system with dynamic 3-week shelf-life decay, repeated extraction mechanics, and anti-overwrite validation safeguards.",
+      "Implemented a commercial client contract system introducing timed market demand, target phenotype quotas, fulfillment pipelines, and failure penalty lockout cycles.",
+      "Built an interactive in-game Mendel Calculator featuring dual-slot gamete inputs, quick-test simulation presets (e.g., AaBb x AaBb), pagination, and trait probability summaries.",
+      "Refactored game engine away from a monolithic God Object into decoupled modular subsystems (GardenManager, ContractManager, PollenInventory) with standard boolean event-handling pipelines."
+    ],
+    uniqueNote: "Features an extensible genetics engine supporting dynamic polyhybrid loci expansion (from dihybrid color/size to trihybrid flower density via Locus C) validated against rigorous biological inheritance mathematics.",
+    addendum: `
+      [LOG ENTRY 07-GA-XE-01]: Core genetics engine verified with automated Punnett matrix segregation conforming to theoretical 9:3:3:1 and trihybrid ratios.
+      [LOG ENTRY 07-GA-XE-02]: Modular UI refactor completed; decoupled inventory dialogs, contract boards, and garden state managers into distinct event-consuming pipelines.
+      [LOG ENTRY 07-GA-XE-03]: v0.3.2 plant refactoring patch implemented; trihybrid locus C (flower count density) and multi-fruit branching render active.
+    `
+  },
+  {
     id: "capital-hub",
     itemNumber: "PROJ-07-IS-FI",
     title: "Capital Hub - Upgraded MyFinance",
@@ -302,5 +374,7 @@ function getProjectById(id) {
   // Handle aliases and backward-compatibility
   let targetId = id === "excel-dahsboard" ? "excel-dashboard" : id;
   if (targetId === "Capital Hub") targetId = "capital-hub";
+  if (targetId === "Channel Youtube") targetId = "channel-youtube";
+  if (targetId === "Tanaman Mulia") targetId = "tanaman-mulia";
   return PROJECTS_DATA.find(p => p.id === targetId || p.id.toLowerCase() === targetId.toLowerCase()) || null;
 }
