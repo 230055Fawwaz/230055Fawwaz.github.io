@@ -64,43 +64,6 @@ const PROJECTS_DATA = [
     `
   },
   {
-    id: "tanaman-mulia",
-    itemNumber: "PROJ-07-GA-XE",
-    title: "Tanaman Mulia - Mendelian Plant Breeding Game",
-    status: "ACTIVE DEVELOPMENT",
-    classification: "WINDOWS GAME | BOTANY & GENETICS SIMULATION | PYGAME-CE",
-    semester: "Semester 7",
-    category: "game",
-    role: "Game Developer & Gameplay Programmer",
-    techStack: ["Python", "Pygame-ce", "Mendelian Genetics Simulation", "OOP Architecture", "State Management", "Modular UI Engine"],
-    githubUrl: "NDA",
-    featured: true,
-    thumbnail: "", // Masukkan path thumbnail kartu di sini, misal: "assets/images/projects/tanaman-mulia-thumb.png"
-    screenshots: [
-      // Masukkan screenshot halaman detail di sini:
-      // {
-      //   url: "assets/images/projects/tanaman-mulia-preview.png",
-      //   caption: "EXHIBIT 01: Garden Interface, Tomato Growth Cycle & Mendel Calculator"
-      // }
-    ],
-    shortDesc: "An educational botany and plant breeding simulation game built with Pygame-ce where players cultivate tomato crops, manage pollen banks, and execute cross-pollination adhering to Mendel's First and Second Laws.",
-    origin: "Conceived to translate theoretical Mendelian genetics into interactive gameplay mechanics, simulating multi-locus inheritance, commercial market contracts, pollen shelf-life, and multi-week plant lifecycles.",
-    contributions: [
-      "Architected an extensible n-locus Mendelian genetics engine calculating 4^n Punnett square combinations, allele segregation, genotype normalization, and phenotypic probability distributions.",
-      "Engineered realistic 4-week tomato growth lifecycles featuring multi-branch tree rendering, independent flower/fruit slot state machines, and autonomous natural self-pollination algorithms.",
-      "Developed a pollen preservation and banking system with dynamic 3-week shelf-life decay, repeated extraction mechanics, and anti-overwrite validation safeguards.",
-      "Implemented a commercial client contract system introducing timed market demand, target phenotype quotas, fulfillment pipelines, and failure penalty lockout cycles.",
-      "Built an interactive in-game Mendel Calculator featuring dual-slot gamete inputs, quick-test simulation presets (e.g., AaBb x AaBb), pagination, and trait probability summaries.",
-      "Refactored game engine away from a monolithic God Object into decoupled modular subsystems (GardenManager, ContractManager, PollenInventory) with standard boolean event-handling pipelines."
-    ],
-    uniqueNote: "Features an extensible genetics engine supporting dynamic polyhybrid loci expansion (from dihybrid color/size to trihybrid flower density via Locus C) validated against rigorous biological inheritance mathematics.",
-    addendum: `
-      [LOG ENTRY 07-GA-XE-01]: Core genetics engine verified with automated Punnett matrix segregation conforming to theoretical 9:3:3:1 and trihybrid ratios.
-      [LOG ENTRY 07-GA-XE-02]: Modular UI refactor completed; decoupled inventory dialogs, contract boards, and garden state managers into distinct event-consuming pipelines.
-      [LOG ENTRY 07-GA-XE-03]: v0.3.2 plant refactoring patch implemented; trihybrid locus C (flower count density) and multi-fruit branching render active.
-    `
-  },
-  {
     id: "capital-hub",
     itemNumber: "PROJ-07-IS-FI",
     title: "Capital Hub - Upgraded MyFinance",
