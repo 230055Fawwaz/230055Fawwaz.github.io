@@ -307,6 +307,23 @@ function initProjectDetail() {
   const contributionSectionNumber = hasExhibits ? '3' : '2';
   const addendumSectionNumber = hasExhibits ? '4' : '3';
 
+  // Parse addendum log entries for clean document flow rendering
+  const rawAddendum = project.addendum || '[LOG ENTRY]: No technical anomalies recorded.';
+  const addendumLines = rawAddendum
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean);
+
+  const addendumListItems = addendumLines.length > 0
+    ? addendumLines.map(line => {
+        const match = line.match(/^(\[[^\]]+\]:?)(.*)$/);
+        if (match) {
+          return `<li><span class="log-tag">${escapeHtml(match[1])}</span> ${escapeHtml(match[2].trim())}</li>`;
+        }
+        return `<li>${escapeHtml(line)}</li>`;
+      }).join('')
+    : `<li><span class="log-tag">[LOG ENTRY]:</span> No technical anomalies recorded.</li>`;
+
   container.innerHTML = `
     <!-- Top Dossier Identification -->
     <div class="dossier-header-strip">
@@ -375,10 +392,10 @@ function initProjectDetail() {
     <h2 class="detail-section-title">
       ${addendumSectionNumber}. ADDENDUM / SPECIAL DEVELOPMENT NOTES
     </h2>
-    <div class="addendum-box">
-${escapeHtml(project.addendum || '[LOG ENTRY]: No technical anomalies recorded.')}
-[UNIQUE NOTE]: ${escapeHtml(project.uniqueNote || 'Documented in official portfolio record.')}
-    </div>
+    <p class="lead-text"><strong>Unique Project Note:</strong> ${escapeHtml(project.uniqueNote || 'Documented in official portfolio record.')}</p>
+    <ul class="detail-list addendum-log-list">
+      ${addendumListItems}
+    </ul>
 
     <!-- Actions -->
     <div class="dossier-nav-footer">

@@ -909,6 +909,26 @@ body {
   color: var(--scp-slate);
 }
 
+
+.addendum-log-list {
+  font-family: var(--font-typewriter);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--scp-text);
+}
+
+.addendum-log-list li {
+  margin-bottom: 8px;
+}
+
+.log-tag {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--scp-crimson);
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+}
+
 .addendum-box {
   background-color: var(--bg-paper);
   border: 1px solid var(--scp-border);
