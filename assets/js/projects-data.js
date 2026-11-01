@@ -338,6 +338,5 @@ function getProjectById(id) {
   let targetId = id === "excel-dahsboard" ? "excel-dashboard" : id;
   if (targetId === "Capital Hub") targetId = "capital-hub";
   if (targetId === "Channel Youtube") targetId = "channel-youtube";
-  if (targetId === "Tanaman Mulia") targetId = "tanaman-mulia";
   return PROJECTS_DATA.find(p => p.id === targetId || p.id.toLowerCase() === targetId.toLowerCase()) || null;
 }
