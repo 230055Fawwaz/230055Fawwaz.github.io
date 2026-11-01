@@ -1476,3 +1476,42 @@ body {
     gap: 16px;
   }
 }
+
+
+/* --- Print Optimization Stylesheet --- */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .site-header,
+  .site-footer,
+  .top-clearance-bar,
+  .filter-bar,
+  .dossier-nav-footer,
+  .nav-toggle,
+  .channel-actions-row,
+  .terminal-actions-group,
+  #scp-contact-form,
+  .dossier-lightbox-modal {
+    display: none !important;
+  }
+
+  .dossier-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .redacted {
+    background: transparent !important;
+    color: #000000 !important;
+    text-decoration: underline dotted;
+  }
+
+  .btn-dossier {
+    display: none !important;
+  }
+}

@@ -623,7 +623,7 @@ ${message}
           </div>
 
           <div id="terminal-feedback" class="terminal-feedback-text">
-            <span class="text-terminal-success">&gt; Transmission verified. Pesan Anda telah terkirim langsung ke inbox Fawwaz Yaqzhan.</span>
+            <span class="text-terminal-success">&gt; Transmission verified. Your message has been delivered directly to Fawwaz Yaqzhan's inbox.</span>
           </div>
         </div>
       `;
@@ -636,7 +636,7 @@ ${message}
           <div>&gt; SENDER: ${escapeHtml(sender)} &lt;${escapeHtml(email)}&gt;</div>
           <div>&gt; TARGET RECIPIENT: ${escapeHtml(targetEmail)}</div>
           <div style="margin-top: 6px; color: #d1d5db;">
-            &gt; Transmisi disiapkan. Silakan pilih metode pengiriman langsung di bawah:
+            &gt; Transmission payload prepared. Select your preferred direct dispatch method below:
           </div>
 
           <div class="terminal-actions-group">
@@ -655,7 +655,7 @@ ${message}
           </div>
 
           <div id="terminal-feedback" class="terminal-feedback-text">
-            *Rekomendasi: Klik <strong>OPEN IN GMAIL WEB</strong> untuk langsung membuka draft email di tab baru Gmail tanpa perlu aplikasi tambahan.
+            *Recommendation: Click <strong>OPEN IN GMAIL WEB</strong> to open a pre-filled draft in Gmail with no local email client required.
           </div>
         </div>
       `;
@@ -676,11 +676,11 @@ ${message}
           }
           copyBtn.textContent = 'COPIED TO CLIPBOARD [OK]!';
           if (feedbackText) {
-            feedbackText.innerHTML = `<span class="text-terminal-success">&gt; Pesan berhasil disalin ke clipboard! Anda dapat menempelkannya langsung ke email tujuan: <strong>${escapeHtml(targetEmail)}</strong>.</span>`;
+            feedbackText.innerHTML = `<span class="text-terminal-success">&gt; Message copied to clipboard! You can paste and send directly to: <strong>${escapeHtml(targetEmail)}</strong>.</span>`;
           }
         } catch (err) {
           if (feedbackText) {
-            feedbackText.innerHTML = `<span class="text-terminal-danger">&gt; Gagal menyalin otomatis. Silakan kirim manual ke ${escapeHtml(targetEmail)}.</span>`;
+            feedbackText.innerHTML = `<span class="text-terminal-danger">&gt; Automatic copy failed. Please dispatch manually to: <strong>${escapeHtml(targetEmail)}</strong>.</span>`;
           }
         }
       });
