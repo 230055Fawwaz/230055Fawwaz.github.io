@@ -66,13 +66,13 @@ const PROJECTS_DATA = [
   {
     id: "capital-hub",
     itemNumber: "PROJ-07-IS-FI",
-    title: "Capital Hub - Upgraded MyFinance",
-    status: "ACTIVE INTERNAL TESTING",
-    classification: "INFORMATION SYSTEM | FINANCE | FORECASTER | CLASSIFIER",
-    semester: "Semester 7",
+    title: "Capital Hub - Personal Financial Desktop App",
+    status: "COMPLETED / RELEASE READY",
+    classification: "SOFTWARE ENGINEERING | DESKTOP EXECUTABLE | PERSONAL FINANCE",
+    semester: "Semester 7 (August 2026 – Present)",
     category: "exe",
-    role: "Fullstack Developer",
-    techStack: ["Flask", "Python", "Jinja2 HTML", "CSS", "JavaScript", "SQLite", "Nuitka Library"],
+    role: "Fullstack Developer & App Pentester",
+    techStack: ["Python", "Flask", "pywebview", "Nuitka", "SQLite", "Chart.js", "Batch Files"],
     githubUrl: "NDA",
     featured: true,
     thumbnail: "", // Masukkan path thumbnail kartu di sini, misal: "assets/images/projects/capitalhub-thumb.png"
@@ -83,19 +83,49 @@ const PROJECTS_DATA = [
       //   caption: "EXHIBIT 01: Main Application Interface & Forecasting Panel"
       // }
     ],
-    shortDesc: "An offline-first standalone Windows executable application engineered to record personal financial transactions with integrated on-device forecasting and classification AI models.",
-    origin: "An evolutionary leap from MyFinance, conceived to eliminate Python/batch environment dependencies and integrate offline predictive AI models into a self-contained native desktop executable.",
+    shortDesc: "An offline-first standalone Windows executable application engineered to record personal financial transactions, multi-wallet cash flow, and dynamic Chart.js analytics.",
+    origin: "An evolutionary upgrade from MyFinance, engineered to eliminate browser runtime and environment dependencies by compiling Python Flask into a secure, self-contained native Windows desktop executable (.exe).",
     contributions: [
-      "Architected an offline-first desktop application combining Flask microservices, Jinja2 dynamic views, and an embedded SQLite database.",
-      "Engineered on-device AI algorithms for transaction auto-categorization and cash flow forecasting without cloud latency or third-party data transmission.",
-      "Constructed an optimized compilation pipeline using Nuitka to transpile Python source code into a standalone, native Windows executable (.exe).",
-      "Designed a simple zero-dependency setup wizard for seamless Windows desktop installation and distribution.",
-      "Conducted extensive daily self-testing (dogfooding) to evaluate local SQLite transaction reliability, process lifecycles, and model inference accuracy."
+      "Architected an offline-first Windows desktop executable using Flask bundled via Nuitka C-transpilation and pywebview, eliminating external browser runtime dependencies.",
+      "Engineered multi-wallet cash flow tracking, budget allocations, and interactive Chart.js visualizations backed by a local SQLite relational database.",
+      "Conducted application-level penetration testing, input sanitization audits, and SQLite schema hardening to safeguard local financial records against unauthorized tampering.",
+      "Automated developer initialization and compilation pipelines using custom Windows Batch (.bat) scripts."
     ],
-    uniqueNote: "Debut standalone executable (.exe) project currently in continuous personal dogfooding and internal testing, ensuring rock-solid local runtime stability, zero cloud dependency, and total data privacy before broader release.",
+    uniqueNote: "Debut standalone executable (.exe) application and largest personal project to date, featuring local-first privacy, zero cloud transmission, and integrated donationware support.",
     addendum: `
-      [LOG ENTRY 07-IS-FI-01]: Compiled standalone executable via Nuitka C-transpilation with bundled SQLite & Flask microservices.
-      [LOG ENTRY 07-IS-FI-02]: Internal dogfooding active; personal financial logs and predictive inference verified for offline runtime stability.
+      [LOG ENTRY 07-IS-FI-01]: Transpiled and compiled standalone Windows executable via Nuitka and pywebview GUI wrapper.
+      [LOG ENTRY 07-IS-FI-02]: Local SQLite database schema secured; penetration tests verified resilience against local injection vectors.
+      [LOG ENTRY 07-IS-FI-03]: Production release candidate validated; final staging checks completed for public distribution.
+    `
+  },
+  {
+    id: "it-inventory",
+    itemNumber: "PROJ-07-IS-INV",
+    title: "IT Asset Inventory System (PT. PEMI – Yazaki Group)",
+    status: "DEPLOYED & OPERATIONAL",
+    classification: "INFORMATION SYSTEM | ENTERPRISE HARDWARE LIFECYCLE",
+    semester: "Semester 7 (July 2026 – August 2026)",
+    category: "web",
+    role: "Fullstack Developer (IT Intern)",
+    techStack: ["Python", "Flask", "Flask-SQLAlchemy", "MySQL", "JavaScript", "Chart.js", "HTML5/CSS3", "Batch Scripting"],
+    githubUrl: "NDA",
+    featured: true,
+    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    screenshots: [],
+    shortDesc: "A modular, enterprise-grade inventory system engineered to monitor hardware lifecycles, manage asset migrations, and automate obsolete equipment flagging across corporate intranet servers.",
+    origin: "Industrial internship capstone project developed on-site at PT. EDS Manufacturing Indonesia (PEMI) - Yazaki Group to digitize internal IT hardware inventory audits and equipment tracking.",
+    contributions: [
+      "Architected a modular backend using Flask (Application Factory pattern & Blueprints) and MySQL via Flask-SQLAlchemy, deployed securely onto the company's local intranet server.",
+      "Engineered an automated hardware lifecycle tracking algorithm to flag aging workstations and peripherals exceeding operational depreciation thresholds.",
+      "Implemented high-volume Excel bulk import/export workflows with dynamic form modals, auto-complete suggestions to prevent duplicate asset tagging, and CSRF token protection.",
+      "Constructed an interactive telemetry dashboard using Vanilla JavaScript and Chart.js displaying real-time hardware status distributions and departmental asset allocation.",
+      "Performed database sanitization and audit reconciliation across 50,000+ active manufacturing inventory and PostgreSQL database records."
+    ],
+    uniqueNote: "Enterprise software project successfully deployed to live corporate intranet servers, directly supporting daily IT operations and hardware depreciation audits at Yazaki Indonesia Group.",
+    addendum: `
+      [LOG ENTRY 07-IS-INV-01]: Flask Application Factory with blueprint modular routing established on internal intranet server.
+      [LOG ENTRY 07-IS-INV-02]: Lifecycle depreciation tracker validated against 50,000+ corporate hardware asset records with zero database corruption.
+      [LOG ENTRY 07-IS-INV-03]: Deployed on-premises under corporate confidentiality guidelines [CLASSIFIED ASSET RECORDS].
     `
   },
   {
@@ -338,5 +368,6 @@ function getProjectById(id) {
   let targetId = id === "excel-dahsboard" ? "excel-dashboard" : id;
   if (targetId === "Capital Hub") targetId = "capital-hub";
   if (targetId === "Channel Youtube") targetId = "channel-youtube";
+  if (targetId === "IT Inventory" || targetId === "it-asset-inventory") targetId = "it-inventory";
   return PROJECTS_DATA.find(p => p.id === targetId || p.id.toLowerCase() === targetId.toLowerCase()) || null;
 }
