@@ -75,13 +75,40 @@ const PROJECTS_DATA = [
     techStack: ["Python", "Flask", "pywebview", "Nuitka", "SQLite", "Chart.js", "Batch Files"],
     githubUrl: "NDA",
     featured: true,
-    thumbnail: "", // Masukkan path thumbnail kartu di sini, misal: "assets/images/projects/capitalhub-thumb.png"
+    thumbnail: "assets/images/projects/capitalhub_dashboard.png",
     screenshots: [
-      // Masukkan screenshot halaman detail di sini:
-      // {
-      //   url: "assets/images/projects/capitalhub-preview.png",
-      //   caption: "EXHIBIT 01: Main Application Interface & Forecasting Panel"
-      // }
+      {
+        url: "assets/images/projects/capitalhub_dashboard.png",
+        caption: "EXHIBIT 01: Main Dashboard & Financial Overview"
+      },
+      {
+        url: "assets/images/projects/capitalhub_transaction.png",
+        caption: "EXHIBIT 02: Transaction Management & Record Ledger"
+      },
+      {
+        url: "assets/images/projects/capitalhub_report.png",
+        caption: "EXHIBIT 03: Cash Flow Analytics & Financial Report"
+      },
+      {
+        url: "assets/images/projects/capitalhub_setupwizard.png",
+        caption: "EXHIBIT 04: Zero-Dependency Setup Wizard"
+      },
+      {
+        url: "assets/images/projects/capitalhub_login.png",
+        caption: "EXHIBIT 05: Authentication & User Login Portal"
+      },
+      {
+        url: "assets/images/projects/capitalhub_profile.png",
+        caption: "EXHIBIT 06: User Profile & Security Configuration"
+      },
+      {
+        url: "assets/images/projects/capitalhub_settings.png",
+        caption: "EXHIBIT 07: Application Preferences & System Settings"
+      },
+      {
+        url: "assets/images/projects/capitalhub_icon.png",
+        caption: "EXHIBIT 08: Standalone Executable Branding & Icon"
+      }
     ],
     shortDesc: "An offline-first standalone Windows executable application engineered to record personal financial transactions, multi-wallet cash flow, and dynamic Chart.js analytics.",
     origin: "An evolutionary upgrade from MyFinance, engineered to eliminate browser runtime and environment dependencies by compiling Python Flask into a secure, self-contained native Windows desktop executable (.exe).",
@@ -175,10 +202,30 @@ const PROJECTS_DATA = [
     featured: true,
     thumbnail: "assets/images/projects/myfinance-cover.png",
     screenshots: [
-      // {
-      //   url: "assets/images/projects/myfinance-dashboard.png",
-      //   caption: "EXHIBIT 01: Interactive Cash Flow & Expense Dashboard"
-      // }
+      {
+        url: "assets/images/projects/myfinance_dashboard.png",
+        caption: "EXHIBIT 01: Interactive Cash Flow & Expense Dashboard"
+      },
+      {
+        url: "assets/images/projects/myfinnace_analyse.png",
+        caption: "EXHIBIT 02: Monthly Expense Breakdown & Analytics Chart"
+      },
+      {
+        url: "assets/images/projects/myfinance_transaction.png",
+        caption: "EXHIBIT 03: Transaction Ledger & Expense Logging Form"
+      },
+      {
+        url: "assets/images/projects/myfinance_report.png",
+        caption: "EXHIBIT 04: Periodic Financial Summary & Report"
+      },
+      {
+        url: "assets/images/projects/myfinance_account.png",
+        caption: "EXHIBIT 05: Account Overview & Balance Details"
+      },
+      {
+        url: "assets/images/projects/myfinance_dropdown.png",
+        caption: "EXHIBIT 06: Dynamic Category & Filter Navigation"
+      }
     ],
     shortDesc: "Lightweight financial dashboard engineered to track, categorize, and visualize monthly student cash flows with Chart.js.",
     origin: "Personal software solution developed to systematically record and analyze monthly student expenditures.",
@@ -332,12 +379,36 @@ const PROJECTS_DATA = [
     techStack: ["Microsoft Excel", "Pivot Tables", "Formulas", "Data Validation"],
     githubUrl: "https://github.com/230055Fawwaz/dashboard-keuangan-excel",
     featured: true,
-    thumbnail: "", // Masukkan path thumbnail kartu di sini
+    thumbnail: "assets/images/projects/excel_dashboard.png",
     screenshots: [
-      // {
-      //   url: "assets/images/projects/excel-dashboard-sheet.png",
-      //   caption: "EXHIBIT 01: Automated Financial Model & Dynamic Pivot Charts"
-      // }
+      {
+        url: "assets/images/projects/excel_beranda.png",
+        caption: "EXHIBIT 01: Beranda & Navigation Center"
+      },
+      {
+        url: "assets/images/projects/excel_dashboard.png",
+        caption: "EXHIBIT 02: Dynamic Financial Dashboard & Key Metrics"
+      },
+      {
+        url: "assets/images/projects/excel_transaksi.png",
+        caption: "EXHIBIT 03: Cash Flow & Expense Transaction Records"
+      },
+      {
+        url: "assets/images/projects/excel_pendapatan.png",
+        caption: "EXHIBIT 04: Income Stream & Revenue Tracking Sheet"
+      },
+      {
+        url: "assets/images/projects/excel_kalkulasi.png",
+        caption: "EXHIBIT 05: Automated Financial Calculations & Formula Models"
+      },
+      {
+        url: "assets/images/projects/excel_laporan.png",
+        caption: "EXHIBIT 06: Financial Summary Report & Reconciliation"
+      },
+      {
+        url: "assets/images/projects/excel_pendukung.png",
+        caption: "EXHIBIT 07: Supporting Tables & Data Validation Master"
+      }
     ],
     shortDesc: "Interactive financial management spreadsheet featuring automated cash flow tracking, Pivot tables, and dynamic dashboards.",
     origin: "Personal financial software solution developed to systematically log, categorize, and review personal cash flow and expenses.",
